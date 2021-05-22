@@ -18,6 +18,18 @@ public class ActorLangBaseListener implements ActorLangListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterEqOp(ActorLangParser.EqOpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitEqOp(ActorLangParser.EqOpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterCompOp(ActorLangParser.CompOpContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -25,6 +37,18 @@ public class ActorLangBaseListener implements ActorLangListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCompOp(ActorLangParser.CompOpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterArithOp(ActorLangParser.ArithOpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArithOp(ActorLangParser.ArithOpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -133,6 +157,18 @@ public class ActorLangBaseListener implements ActorLangListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitModuloExpr(ActorLangParser.ModuloExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterUnaryPlus(ActorLangParser.UnaryPlusContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitUnaryPlus(ActorLangParser.UnaryPlusContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -318,13 +354,25 @@ public class ActorLangBaseListener implements ActorLangListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCreateStmt(ActorLangParser.CreateStmtContext ctx) { }
+	@Override public void enterAssignStmt(ActorLangParser.AssignStmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCreateStmt(ActorLangParser.CreateStmtContext ctx) { }
+	@Override public void exitAssignStmt(ActorLangParser.AssignStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCreateExpr(ActorLangParser.CreateExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCreateExpr(ActorLangParser.CreateExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

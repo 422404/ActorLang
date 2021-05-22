@@ -2,8 +2,8 @@ package org.actorlang.ast
 
 import org.actorlang.parser.Position
 
-class RootNode(
+class StringLiteralNode(
     startPosition: Position,
     endPosition: Position,
-    val toplevelStatements: Array<StatementNode>
-): Node(startPosition, endPosition)
+    val text: String
+): ExpressionNode(startPosition, endPosition), MessagePatternItem

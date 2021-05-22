@@ -13,11 +13,23 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface ActorLangVisitor<T> extends ParseTreeVisitor<T> {
 	/**
+	 * Visit a parse tree produced by {@link ActorLangParser#eqOp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEqOp(ActorLangParser.EqOpContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ActorLangParser#compOp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitCompOp(ActorLangParser.CompOpContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ActorLangParser#arithOp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArithOp(ActorLangParser.ArithOpContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ActorLangParser#expr}.
 	 * @param ctx the parse tree
@@ -72,6 +84,12 @@ public interface ActorLangVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitModuloExpr(ActorLangParser.ModuloExprContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ActorLangParser#unaryPlus}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUnaryPlus(ActorLangParser.UnaryPlusContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ActorLangParser#unaryMinus}.
 	 * @param ctx the parse tree
@@ -163,11 +181,17 @@ public interface ActorLangVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSendStmt(ActorLangParser.SendStmtContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ActorLangParser#createStmt}.
+	 * Visit a parse tree produced by {@link ActorLangParser#assignStmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCreateStmt(ActorLangParser.CreateStmtContext ctx);
+	T visitAssignStmt(ActorLangParser.AssignStmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ActorLangParser#createExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateExpr(ActorLangParser.CreateExprContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ActorLangParser#parameterizedBehavior}.
 	 * @param ctx the parse tree

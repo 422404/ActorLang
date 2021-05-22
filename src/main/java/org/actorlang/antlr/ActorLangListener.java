@@ -10,6 +10,16 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface ActorLangListener extends ParseTreeListener {
 	/**
+	 * Enter a parse tree produced by {@link ActorLangParser#eqOp}.
+	 * @param ctx the parse tree
+	 */
+	void enterEqOp(ActorLangParser.EqOpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ActorLangParser#eqOp}.
+	 * @param ctx the parse tree
+	 */
+	void exitEqOp(ActorLangParser.EqOpContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ActorLangParser#compOp}.
 	 * @param ctx the parse tree
 	 */
@@ -19,6 +29,16 @@ public interface ActorLangListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCompOp(ActorLangParser.CompOpContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ActorLangParser#arithOp}.
+	 * @param ctx the parse tree
+	 */
+	void enterArithOp(ActorLangParser.ArithOpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ActorLangParser#arithOp}.
+	 * @param ctx the parse tree
+	 */
+	void exitArithOp(ActorLangParser.ArithOpContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ActorLangParser#expr}.
 	 * @param ctx the parse tree
@@ -109,6 +129,16 @@ public interface ActorLangListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitModuloExpr(ActorLangParser.ModuloExprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ActorLangParser#unaryPlus}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnaryPlus(ActorLangParser.UnaryPlusContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ActorLangParser#unaryPlus}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnaryPlus(ActorLangParser.UnaryPlusContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ActorLangParser#unaryMinus}.
 	 * @param ctx the parse tree
@@ -260,15 +290,25 @@ public interface ActorLangListener extends ParseTreeListener {
 	 */
 	void exitSendStmt(ActorLangParser.SendStmtContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ActorLangParser#createStmt}.
+	 * Enter a parse tree produced by {@link ActorLangParser#assignStmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterCreateStmt(ActorLangParser.CreateStmtContext ctx);
+	void enterAssignStmt(ActorLangParser.AssignStmtContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ActorLangParser#createStmt}.
+	 * Exit a parse tree produced by {@link ActorLangParser#assignStmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitCreateStmt(ActorLangParser.CreateStmtContext ctx);
+	void exitAssignStmt(ActorLangParser.AssignStmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ActorLangParser#createExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateExpr(ActorLangParser.CreateExprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ActorLangParser#createExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateExpr(ActorLangParser.CreateExprContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ActorLangParser#parameterizedBehavior}.
 	 * @param ctx the parse tree

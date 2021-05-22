@@ -2,8 +2,7 @@ package org.actorlang.ast
 
 import org.actorlang.parser.Position
 
-class RootNode(
+abstract class StatementNode(
     startPosition: Position,
-    endPosition: Position,
-    val toplevelStatements: Array<StatementNode>
+    endPosition: Position
 ): Node(startPosition, endPosition)

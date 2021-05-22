@@ -50,39 +50,52 @@ Percent: '%';
 
 Not: '!' | '¬';
 
-compOp:
+eqOp:
       Eq
     | Neq
-    | Lower
+;
+
+compOp:
+      Lower
     | Leq
     | Greater
     | Geq
 ;
 
-expr: orExpr;
+arithOp:
+      Plus
+    | Minus
+;
 
-orExpr: andExpr (Or andExpr)* ;
+expr:
+      orExpr
+    | createExpr;
 
-andExpr: eqExpr (And eqExpr)* ;
+orExpr: andExpr (Or orExpr)?;
 
-eqExpr: compExpr (Eq compExpr)? ;
+andExpr: eqExpr (And andExpr)?;
 
-compExpr: arithExpr (compOp arithExpr)? ;
+eqExpr: compExpr (eqOp compExpr)?;
 
-arithExpr: termExpr ((Plus | Minus) termExpr)* ;
+compExpr: arithExpr (compOp arithExpr)?;
 
-termExpr: factorExpr (Star factorExpr)* ;
+arithExpr: termExpr (arithOp arithExpr)?;
 
-factorExpr: moduloExpr (Slash moduloExpr)* ;
+termExpr: factorExpr (Star termExpr)?;
 
-moduloExpr: unary (Percent unary)? ;
+factorExpr: moduloExpr (Slash factorExpr)?;
+
+moduloExpr: unary (Percent unary)?;
+
+unaryPlus: Plus atom;
 
 unaryMinus: Minus atom;
 
 unaryNot: Not atom;
 
 unary:
-      unaryMinus
+      unaryPlus
+    | unaryMinus
     | unaryNot
     | atom
 ;
@@ -103,7 +116,7 @@ literal:
 
 identifier: Identifier;
 
-parenExpression: '(' expr ')';
+parenExpression: LParen expr RParen;
 
 behavior:
     identifier behaviorState behaviorMessagePattern Assign
@@ -123,7 +136,7 @@ behaviorStmt:
       displayStmt
     | becomeStmt
     | sendStmt
-    | createStmt
+    | assignStmt
 ;
 
 displayStmt: Display expr;
@@ -132,12 +145,17 @@ becomeStmt: Become parameterizedBehavior;
 
 sendStmt: Send LBracket (expr (Comma expr)*)? RBracket To identifier;
 
-createStmt: identifier Assign Create parameterizedBehavior;
+assignStmt: identifier Assign expr;
+
+createExpr: Create parameterizedBehavior;
 
 parameterizedBehavior: identifier LParen (expr (Comma expr)*)? RParen;
 
 toplevelStmt:
       behavior
+    | displayStmt
+    | sendStmt
+    | assignStmt
 ;
 
 root: (toplevelStmt (Semi toplevelStmt)* Semi?)? EOF;
