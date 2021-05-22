@@ -4,11 +4,21 @@ plugins {
     id 'antlr'
 }
 
-group = 'actor-lang'
+group = 'org.actorlang'
 version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+}
+
+application {
+    mainClass = 'org.actorlang.MainKt'
+    applicationName = 'actorlang'
+}
+
+generateGrammarSource {
+    arguments += ["-visitor", "-long-messages"]
+    outputDirectory = file("src/main/java/")
 }
 
 dependencies {
@@ -32,13 +42,4 @@ compileKotlin {
 
 compileTestKotlin {
     kotlinOptions.jvmTarget = '1.8'
-}
-
-application {
-    mainClass = 'org.actorlang.MainKt'
-}
-
-generateGrammarSource {
-    arguments += ["-visitor", "-long-messages"]
-    outputDirectory = file("src/main/java/")
 }
