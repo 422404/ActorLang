@@ -62,11 +62,9 @@ private fun printUsage() {
     println("No file path provided. Please provide one.")
 }
 
-private fun readInputFile(filePath: String): String? {
-    val bufferedReader = File(filePath).bufferedReader()
-
+private fun readInputFile(file: File): String? {
     return try {
-        bufferedReader.use(BufferedReader::readText)
+        file.bufferedReader().use(BufferedReader::readText)
     } catch (e: Exception) {
         null
     }
@@ -77,20 +75,21 @@ fun main(vararg args: String) {
         printUsage()
         -1
     } else {
-        val fileContent = readInputFile(args[0])
+        val file = File(args[0])
+        val fileContent = readInputFile(file)
         if (fileContent == null) {
             println("Cannot read file content.")
             -1
         } else {
-            execute(fileContent)
+            execute(fileContent, file.absolutePath)
         }
     }
     exitProcess(result)
 }
 
-private fun execute(code: String): Int {
+private fun execute(code: String, sourceName: String): Int {
     val config = Configuration().apply {
-        debug = true
+        // debug = true
         // messageDuplicates = true
         // duplicationChances = 0.5f
         // outOfOrderMessages = true
@@ -106,7 +105,7 @@ private fun execute(code: String): Int {
     )
 
     println("---- start system ----")
-    interpreter.run(code, "<test>")
+    interpreter.run(code, sourceName)
     println("---- stop system -----")
 
     return 0
