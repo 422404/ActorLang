@@ -1,10 +1,30 @@
 package org.actorlang.parser.impl
 
+import org.actorlang.antlr.ActorLangAntlrErrorListener
 import org.actorlang.antlr.ActorLangBaseVisitor
 import org.actorlang.antlr.ActorLangLexer
 import org.actorlang.antlr.ActorLangParser
-import org.actorlang.antlr.ActorLangAntlrErrorListener
-import org.actorlang.ast.*
+import org.actorlang.ast.AssignNode
+import org.actorlang.ast.BecomeNode
+import org.actorlang.ast.BehaviorNode
+import org.actorlang.ast.BinaryOpNode
+import org.actorlang.ast.BinaryOpType
+import org.actorlang.ast.BooleanLiteralNode
+import org.actorlang.ast.CreateNode
+import org.actorlang.ast.DisplayNode
+import org.actorlang.ast.ExpressionNode
+import org.actorlang.ast.IdentifierNode
+import org.actorlang.ast.IfNode
+import org.actorlang.ast.IntegerLiteralNode
+import org.actorlang.ast.MessagePatternItem
+import org.actorlang.ast.Node
+import org.actorlang.ast.RootNode
+import org.actorlang.ast.SelfLiteralNode
+import org.actorlang.ast.SendNode
+import org.actorlang.ast.StatementNode
+import org.actorlang.ast.StringLiteralNode
+import org.actorlang.ast.UnaryOpNode
+import org.actorlang.ast.UnaryOpType
 import org.actorlang.parser.Parser
 import org.actorlang.parser.Position
 import org.antlr.v4.runtime.CharStreams
@@ -134,6 +154,20 @@ class AntlrParser(
             startPosition = sourcePosition(ctx.start),
             endPosition = sourcePosition(ctx.stop),
             name = ctx.text
+        )
+    }
+
+    override fun visitIfStmt(ctx: ActorLangParser.IfStmtContext): Node {
+        return IfNode(
+            startPosition = sourcePosition(ctx.start),
+            endPosition = sourcePosition(ctx.stop),
+            condition = visit(ctx.expr()) as ExpressionNode,
+            thenStatements = ctx.thenStmts.map {
+                visit(it) as StatementNode
+            }.toTypedArray(),
+            elseStatements = ctx.elseStmts.map {
+                visit(it) as StatementNode
+            }.toTypedArray()
         )
     }
 

@@ -1,6 +1,22 @@
 package org.actorlang.ast.visitor
 
-import org.actorlang.ast.*
+import org.actorlang.ast.AssignNode
+import org.actorlang.ast.BecomeNode
+import org.actorlang.ast.BehaviorNode
+import org.actorlang.ast.BinaryOpNode
+import org.actorlang.ast.BooleanLiteralNode
+import org.actorlang.ast.CreateNode
+import org.actorlang.ast.DisplayNode
+import org.actorlang.ast.IdentifierNode
+import org.actorlang.ast.IfNode
+import org.actorlang.ast.IntegerLiteralNode
+import org.actorlang.ast.MessagePatternItem
+import org.actorlang.ast.Node
+import org.actorlang.ast.RootNode
+import org.actorlang.ast.SelfLiteralNode
+import org.actorlang.ast.SendNode
+import org.actorlang.ast.StringLiteralNode
+import org.actorlang.ast.UnaryOpNode
 
 open class BaseAstVisitor: AstVisitor {
     fun visit(node: Node) = when (node) {
@@ -12,6 +28,7 @@ open class BaseAstVisitor: AstVisitor {
         is CreateNode -> visit(node)
         is DisplayNode -> visit(node)
         is IdentifierNode -> visit(node)
+        is IfNode -> visit(node)
         is IntegerLiteralNode -> visit(node)
         is RootNode -> visit(node)
         is SelfLiteralNode -> visit(node)
@@ -76,6 +93,16 @@ open class BaseAstVisitor: AstVisitor {
     }
 
     override fun visit(node: IdentifierNode) {
+    }
+
+    override fun visit(node: IfNode) {
+        visit(node.condition)
+        node.thenStatements.forEach {
+            visit(it)
+        }
+        node.elseStatements.forEach {
+            visit(it)
+        }
     }
 
     override fun visit(node: IntegerLiteralNode) {

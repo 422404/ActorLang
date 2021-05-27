@@ -18,6 +18,8 @@ Become: 'become';
 Display: 'display';
 Send: 'send';
 To: 'to';
+If: 'if';
+Else: 'else';
 
 Identifier: [a-zA-Z][a-zA-Z0-9_]*;
 
@@ -137,6 +139,7 @@ behaviorStmt:
     | becomeStmt
     | sendStmt
     | assignStmt
+    | ifStmt
 ;
 
 displayStmt: Display expr;
@@ -146,6 +149,17 @@ becomeStmt: Become parameterizedBehavior;
 sendStmt: Send LBracket (expr (Comma expr)*)? RBracket To identifier;
 
 assignStmt: identifier Assign expr;
+
+ifStmt:
+      If LParen expr RParen
+      LCurly
+        (thenStmts+=behaviorStmt (Semi thenStmts+=behaviorStmt)* Semi?)?
+      RCurly
+      (Else
+      LCurly
+        (elseStmts+=behaviorStmt (Semi elseStmts+=behaviorStmt)* Semi?)?
+      RCurly)?
+;
 
 createExpr: Create parameterizedBehavior;
 

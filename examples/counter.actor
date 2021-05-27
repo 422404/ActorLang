@@ -1,0 +1,23 @@
+Csender (A) [N] =
+{
+    S = create Csender2 (A, N, 1);
+    send ["ack"] to S
+};
+
+Csender2 (A, N, I) ["ack"] =
+{
+    if (I ≤ N) {
+        send [self, I] to A;
+        become Csender2 (A, N, I + 1)
+    }
+};
+
+Creceiver () [A, N] =
+{
+    display N;
+    send ["ack"] to A
+};
+
+Receiver = create Creceiver ();
+Sender = create Csender (Receiver);
+send [10] to Sender;

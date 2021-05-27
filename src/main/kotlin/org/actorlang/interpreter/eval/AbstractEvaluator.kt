@@ -10,6 +10,7 @@ import org.actorlang.ast.CreateNode
 import org.actorlang.ast.DisplayNode
 import org.actorlang.ast.ExpressionNode
 import org.actorlang.ast.IdentifierNode
+import org.actorlang.ast.IfNode
 import org.actorlang.ast.IntegerLiteralNode
 import org.actorlang.ast.SelfLiteralNode
 import org.actorlang.ast.SendNode
@@ -253,6 +254,20 @@ abstract class AbstractEvaluator(
     override fun visit(node: IdentifierNode) {
         // Only visited while reading a variable
         result = currentScope[node.name]
+    }
+
+    override fun visit(node: IfNode) {
+        val condition = visitExpression(node.condition)
+        if (condition is Boolean) {
+            if (condition) {
+                node.thenStatements.forEach { visit(it) }
+            } else {
+                node.elseStatements.forEach { visit(it) }
+            }
+        } else {
+            throwWithPosition(node.startPosition,
+                "Conditions in 'if' must be of boolean type")
+        }
     }
 
     override fun visit(node: IntegerLiteralNode) {

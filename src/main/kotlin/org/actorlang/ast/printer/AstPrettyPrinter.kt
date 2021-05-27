@@ -1,6 +1,20 @@
 package org.actorlang.ast.printer
 
-import org.actorlang.ast.*
+import org.actorlang.ast.AssignNode
+import org.actorlang.ast.BecomeNode
+import org.actorlang.ast.BehaviorNode
+import org.actorlang.ast.BinaryOpNode
+import org.actorlang.ast.BooleanLiteralNode
+import org.actorlang.ast.CreateNode
+import org.actorlang.ast.DisplayNode
+import org.actorlang.ast.IdentifierNode
+import org.actorlang.ast.IfNode
+import org.actorlang.ast.IntegerLiteralNode
+import org.actorlang.ast.Node
+import org.actorlang.ast.SelfLiteralNode
+import org.actorlang.ast.SendNode
+import org.actorlang.ast.StringLiteralNode
+import org.actorlang.ast.UnaryOpNode
 import org.actorlang.ast.visitor.BaseAstVisitor
 
 class AstPrettyPrinter(
@@ -130,6 +144,35 @@ class AstPrettyPrinter(
 
     override fun visit(node: IdentifierNode) {
         printer.print(node.name)
+    }
+
+    override fun visit(node: IfNode) {
+        printer.apply {
+            println("IfNode {")
+            indent {
+                print("if = ")
+                visit(node.condition)
+                println()
+                println("then {")
+                indent {
+                    node.thenStatements.forEach {
+                        visit(it)
+                    }
+                }
+                if (node.elseStatements.isEmpty()) {
+                    println("}")
+                } else {
+                    println("} else {")
+                    indent {
+                        node.thenStatements.forEach {
+                            visit(it)
+                        }
+                    }
+                    println("}")
+                }
+            }
+            println("}")
+        }
     }
 
     override fun visit(node: IntegerLiteralNode) {
