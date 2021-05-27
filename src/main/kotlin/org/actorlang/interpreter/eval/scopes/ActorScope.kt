@@ -1,6 +1,5 @@
-package org.actorlang.interpreter.scopes
+package org.actorlang.interpreter.eval.scopes
 
-import org.actorlang.interpreter.Scope
 import org.actorlang.interpreter.exceptions.ActorLangRuntimeException
 import org.actorlang.interpreter.objects.Actor
 

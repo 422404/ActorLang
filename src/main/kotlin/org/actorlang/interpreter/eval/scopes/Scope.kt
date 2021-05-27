@@ -1,4 +1,4 @@
-package org.actorlang.interpreter
+package org.actorlang.interpreter.eval.scopes
 
 abstract class Scope(
     val parent: Scope?

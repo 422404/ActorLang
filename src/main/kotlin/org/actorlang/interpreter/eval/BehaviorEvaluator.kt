@@ -8,8 +8,8 @@ import org.actorlang.interpreter.Context
 import org.actorlang.interpreter.exceptions.ActorLangRuntimeException
 import org.actorlang.interpreter.exceptions.ChangeActorTypeException
 import org.actorlang.interpreter.objects.Actor
-import org.actorlang.interpreter.scopes.ActorScope
-import org.actorlang.interpreter.scopes.BaseScope
+import org.actorlang.interpreter.eval.scopes.ActorScope
+import org.actorlang.interpreter.eval.scopes.BaseScope
 
 class BehaviorEvaluator(
     private val actor: Actor,

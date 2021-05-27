@@ -7,7 +7,7 @@ import org.actorlang.ast.SelfLiteralNode
 import org.actorlang.interpreter.Context
 import org.actorlang.interpreter.objects.ActorType
 import org.actorlang.interpreter.objects.Behavior
-import org.actorlang.interpreter.scopes.BaseScope
+import org.actorlang.interpreter.eval.scopes.BaseScope
 
 class RootEvaluator(
     context: Context
