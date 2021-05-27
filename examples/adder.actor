@@ -1,0 +1,11 @@
+Cadder1 ()  [X] = become Cadder2 (X);
+Cadder2 (X) [Y] = { display (X + Y);
+                    become Cadder1 () };
+
+Adder = create Cadder1 ();
+send [1] to Adder;
+send [2] to Adder;
+send [3] to Adder;
+send [4] to Adder;
+send [5] to Adder;
+send [6] to Adder;
