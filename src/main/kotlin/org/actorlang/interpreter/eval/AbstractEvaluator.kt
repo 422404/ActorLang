@@ -18,8 +18,8 @@ import org.actorlang.ast.UnaryOpNode
 import org.actorlang.ast.UnaryOpType
 import org.actorlang.ast.visitor.BaseAstVisitor
 import org.actorlang.interpreter.Context
-import org.actorlang.interpreter.eval.scopes.Scope
 import org.actorlang.interpreter.comms.Message
+import org.actorlang.interpreter.eval.scopes.Scope
 import org.actorlang.interpreter.exceptions.ActorLangRuntimeException
 import org.actorlang.interpreter.objects.Actor
 import org.actorlang.parser.Position
@@ -35,7 +35,7 @@ abstract class AbstractEvaluator(
         get() = activeScopes.last!!
 
     protected fun throwWithPosition(position: Position, msg: String): Nothing {
-        val newMsg = "Exception at ${position.filePath}:${position.line}:${position.column}: $msg"
+        val newMsg = "Exception at ${position.sourceName}:${position.line}:${position.column}: $msg"
         throw ActorLangRuntimeException(newMsg)
     }
 

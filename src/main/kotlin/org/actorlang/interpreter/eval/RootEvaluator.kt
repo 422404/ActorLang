@@ -5,15 +5,15 @@ import org.actorlang.ast.BehaviorNode
 import org.actorlang.ast.RootNode
 import org.actorlang.ast.SelfLiteralNode
 import org.actorlang.interpreter.Context
+import org.actorlang.interpreter.eval.scopes.BaseScope
 import org.actorlang.interpreter.objects.ActorType
 import org.actorlang.interpreter.objects.Behavior
-import org.actorlang.interpreter.eval.scopes.BaseScope
 
 class RootEvaluator(
     context: Context
 ): AbstractEvaluator(context) {
     fun evaluateRoot(rootNode: RootNode) {
-        activeScopes.push(BaseScope(null))
+        activeScopes.add(BaseScope(null))
         visit(rootNode)
     }
 
