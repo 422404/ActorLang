@@ -39,7 +39,7 @@ class Actor(
     override fun run() {
         val messageQueue = ActorMessageQueueImpl()
         context.communicationsBinder.bind(this, messageQueue)
-        val thread = ActorThreadImpl(this, messageQueue)
+        val thread = ActorThreadImpl(this, messageQueue, context)
         context.scheduler.schedule(thread)
     }
 

@@ -59,8 +59,6 @@ class CommunicationsManager: CommunicationsBinder, CommunicationsSender {
             val isOutOfOrder = cfg.outOfOrderMessages
                     && Random.nextFloat() < cfg.outOfOrderChances
 
-            // TODO Fake latency
-
             if (isOutOfOrder) {
                 actorMessageQueue.pushRandomIndex(message)
             } else {
