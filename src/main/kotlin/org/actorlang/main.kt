@@ -1,9 +1,13 @@
 package org.actorlang
 
 import org.actorlang.ast.printer.AstPrettyPrinter
+import org.actorlang.config.Configuration
+import org.actorlang.interpreter.InterpreterImpl
+import org.actorlang.interpreter.comms.CommunicationsManager
+import org.actorlang.interpreter.scheduler.SchedulerImpl
 import org.actorlang.parser.impl.AntlrParser
 
-fun main(args: Array<String>) {
+fun main() {
     /* val code = """
         Ca () ["init", V] = become Cb (V);
         
@@ -27,9 +31,25 @@ fun main(args: Array<String>) {
         send ["show"] to Inc;
     """.trimIndent()
 
-    val parser = AntlrParser("<test>")
-    val ast = parser.parse(code)
+    AstPrettyPrinter(AntlrParser("<test>").parse(code), 2).printAst()
+    println()
 
-    println("$code\n")
-    AstPrettyPrinter(ast, 2).printAst()
+    val config = Configuration().apply {
+        debug = true
+        messageDuplicates = false
+        outOfOrderMessages = false
+    }
+    val communicationsManager = CommunicationsManager()
+    val scheduler = SchedulerImpl()
+    val interpreter = InterpreterImpl(
+        config,
+        System.out,
+        communicationsManager,
+        communicationsManager,
+        scheduler
+    )
+
+    println("---- start system ----")
+    interpreter.run(code, "<test>")
+    println("---- stop system -----")
 }

@@ -1,0 +1,21 @@
+package org.actorlang.interpreter.scopes
+
+import org.actorlang.interpreter.Scope
+import org.actorlang.interpreter.exceptions.ActorLangRuntimeException
+
+class BaseScope(parent: Scope?): Scope(parent) {
+    private val vars = mutableMapOf<String, Any>()
+
+    override fun set(name: String, value: Any) {
+        vars[name] = value
+    }
+
+    override fun get(name: String): Any {
+        return vars.getOrElse(name) {
+            when (parent) {
+                null -> throw ActorLangRuntimeException("Variable '$name' not in scope")
+                else -> parent[name]
+            }
+        }
+    }
+}
