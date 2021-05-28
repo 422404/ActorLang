@@ -6,4 +6,4 @@ class DisplayNode(
     startPosition: Position,
     endPosition: Position,
     val value: ExpressionNode
-): StatementNode(startPosition, endPosition)
+) : StatementNode(startPosition, endPosition)

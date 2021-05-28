@@ -9,4 +9,4 @@ class BehaviorNode(
     val stateVars: Array<IdentifierNode>,
     val messagePatternItems: Array<MessagePatternItem>,
     val statements: Array<StatementNode>
-): StatementNode(startPosition, endPosition)
+) : StatementNode(startPosition, endPosition)

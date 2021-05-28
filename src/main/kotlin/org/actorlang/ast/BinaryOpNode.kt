@@ -8,4 +8,4 @@ class BinaryOpNode(
     val left: ExpressionNode,
     val right: ExpressionNode?,
     val type: BinaryOpType
-): ExpressionNode(startPosition, endPosition)
+) : ExpressionNode(startPosition, endPosition)

@@ -6,6 +6,6 @@ import org.actorlang.interpreter.objects.Actor
 abstract class ActorThread(
     val actor: Actor,
     val actorMessageQueue: ActorMessageQueue
-): Thread() {
+) : Thread() {
     abstract fun stopWhenPermitted()
 }

@@ -6,4 +6,4 @@ class IdentifierNode(
     startPosition: Position,
     endPosition: Position,
     val name: String
-): ExpressionNode(startPosition, endPosition), MessagePatternItem
+) : ExpressionNode(startPosition, endPosition), MessagePatternItem

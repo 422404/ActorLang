@@ -7,4 +7,4 @@ class AssignNode(
     endPosition: Position,
     val variable: IdentifierNode,
     val value: ExpressionNode
-): StatementNode(startPosition, endPosition)
+) : StatementNode(startPosition, endPosition)

@@ -14,14 +14,15 @@ class Actor(
     var actorType: ActorType,
     var state: Array<Any>,
     private val context: Context
-): Runnable {
+) : Runnable {
     fun become(actorTypeName: String, state: Array<Any>) = synchronized(actorType) {
         val actorType = context.actorTypes.getOrElse(actorTypeName) {
             throw ActorLangRuntimeException("Actor type '$actorTypeName' not declared")
         }
         if (actorType.stateVarNames.size != state.size) {
             throw ActorLangRuntimeException(
-                "Cannot change actor type to '$actorTypeName', wrong state arity")
+                "Cannot change actor type to '$actorTypeName', wrong state arity"
+            )
         }
         this.actorType = actorType
         this.state = state

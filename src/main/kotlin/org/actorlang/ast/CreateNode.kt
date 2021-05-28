@@ -7,4 +7,4 @@ class CreateNode(
     endPosition: Position,
     val behaviorName: IdentifierNode,
     val stateValues: Array<ExpressionNode>
-): ExpressionNode(startPosition, endPosition)
+) : ExpressionNode(startPosition, endPosition)

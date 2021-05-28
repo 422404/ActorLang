@@ -6,4 +6,4 @@ class StringLiteralNode(
     startPosition: Position,
     endPosition: Position,
     val text: String
-): ExpressionNode(startPosition, endPosition), MessagePatternItem
+) : ExpressionNode(startPosition, endPosition), MessagePatternItem

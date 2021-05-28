@@ -7,4 +7,4 @@ class BecomeNode(
     endPosition: Position,
     val behaviorName: IdentifierNode,
     val stateValues: Array<ExpressionNode>
-): StatementNode(startPosition, endPosition)
+) : StatementNode(startPosition, endPosition)

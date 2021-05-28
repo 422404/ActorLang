@@ -28,7 +28,7 @@ import java.util.LinkedList
 
 abstract class AbstractEvaluator(
     protected val context: Context
-): BaseAstVisitor() {
+) : BaseAstVisitor() {
     protected var result: Any? = null
 
     protected val activeScopes = LinkedList<Scope>()
@@ -53,8 +53,10 @@ abstract class AbstractEvaluator(
         if (a is Boolean && b is Boolean) {
             return a || b
         } else {
-            throwWithPosition(position,
-                "Type mismatch, cannot apply 'or' to ${a::class.simpleName} and ${b::class.simpleName}")
+            throwWithPosition(
+                position,
+                "Type mismatch, cannot apply 'or' to ${a::class.simpleName} and ${b::class.simpleName}"
+            )
         }
     }
 
@@ -62,8 +64,10 @@ abstract class AbstractEvaluator(
         if (a is Boolean && b is Boolean) {
             return a && b
         } else {
-            throwWithPosition(position,
-                "Type mismatch, cannot apply 'and' to ${a::class.simpleName} and ${b::class.simpleName}")
+            throwWithPosition(
+                position,
+                "Type mismatch, cannot apply 'and' to ${a::class.simpleName} and ${b::class.simpleName}"
+            )
         }
     }
 
@@ -71,8 +75,10 @@ abstract class AbstractEvaluator(
         if (a::class == b::class) {
             return a == b
         } else {
-            throwWithPosition(position,
-                "Type mismatch, cannot check equality of ${a::class.simpleName} and ${b::class.simpleName}")
+            throwWithPosition(
+                position,
+                "Type mismatch, cannot check equality of ${a::class.simpleName} and ${b::class.simpleName}"
+            )
         }
     }
 
@@ -80,8 +86,10 @@ abstract class AbstractEvaluator(
         if (a::class == b::class) {
             return a != b
         } else {
-            throwWithPosition(position,
-                "Type mismatch, cannot check inequality of ${a::class.simpleName} and ${b::class.simpleName}")
+            throwWithPosition(
+                position,
+                "Type mismatch, cannot check inequality of ${a::class.simpleName} and ${b::class.simpleName}"
+            )
         }
     }
 
@@ -89,8 +97,10 @@ abstract class AbstractEvaluator(
         if (a is Int && b is Int) {
             return a < b
         } else {
-            throwWithPosition(position,
-                "Type mismatch, cannot compare ${a::class.simpleName} and ${b::class.simpleName}")
+            throwWithPosition(
+                position,
+                "Type mismatch, cannot compare ${a::class.simpleName} and ${b::class.simpleName}"
+            )
         }
     }
 
@@ -98,8 +108,10 @@ abstract class AbstractEvaluator(
         if (a is Int && b is Int) {
             return a <= b
         } else {
-            throwWithPosition(position,
-                "Type mismatch, cannot compare ${a::class.simpleName} and ${b::class.simpleName}")
+            throwWithPosition(
+                position,
+                "Type mismatch, cannot compare ${a::class.simpleName} and ${b::class.simpleName}"
+            )
         }
     }
 
@@ -107,8 +119,10 @@ abstract class AbstractEvaluator(
         if (a is Int && b is Int) {
             return a > b
         } else {
-            throwWithPosition(position,
-                "Type mismatch, cannot compare ${a::class.simpleName} and ${b::class.simpleName}")
+            throwWithPosition(
+                position,
+                "Type mismatch, cannot compare ${a::class.simpleName} and ${b::class.simpleName}"
+            )
         }
     }
 
@@ -116,8 +130,10 @@ abstract class AbstractEvaluator(
         if (a is Int && b is Int) {
             return a >= b
         } else {
-            throwWithPosition(position,
-                "Type mismatch, cannot compare ${a::class.simpleName} and ${b::class.simpleName}")
+            throwWithPosition(
+                position,
+                "Type mismatch, cannot compare ${a::class.simpleName} and ${b::class.simpleName}"
+            )
         }
     }
 
@@ -125,8 +141,10 @@ abstract class AbstractEvaluator(
         if (a is Int && b is Int) {
             return a + b
         } else {
-            throwWithPosition(position,
-                "Type mismatch, cannot add ${a::class.simpleName} to ${b::class.simpleName}")
+            throwWithPosition(
+                position,
+                "Type mismatch, cannot add ${a::class.simpleName} to ${b::class.simpleName}"
+            )
         }
     }
 
@@ -134,8 +152,10 @@ abstract class AbstractEvaluator(
         if (a is Int && b is Int) {
             return a - b
         } else {
-            throwWithPosition(position,
-                "Type mismatch, cannot sub ${a::class.simpleName} to ${b::class.simpleName}")
+            throwWithPosition(
+                position,
+                "Type mismatch, cannot sub ${a::class.simpleName} to ${b::class.simpleName}"
+            )
         }
     }
 
@@ -143,8 +163,10 @@ abstract class AbstractEvaluator(
         if (a is Int && b is Int) {
             return a * b
         } else {
-            throwWithPosition(position,
-                "Type mismatch, cannot mul ${a::class.simpleName} by ${b::class.simpleName}")
+            throwWithPosition(
+                position,
+                "Type mismatch, cannot mul ${a::class.simpleName} by ${b::class.simpleName}"
+            )
         }
     }
 
@@ -152,8 +174,10 @@ abstract class AbstractEvaluator(
         if (a is Int && b is Int) {
             return a / b
         } else {
-            throwWithPosition(position,
-                "Type mismatch, cannot div by ${a::class.simpleName} by ${b::class.simpleName}")
+            throwWithPosition(
+                position,
+                "Type mismatch, cannot div by ${a::class.simpleName} by ${b::class.simpleName}"
+            )
         }
     }
 
@@ -161,8 +185,10 @@ abstract class AbstractEvaluator(
         if (a is Int && b is Int) {
             return a % b
         } else {
-            throwWithPosition(position,
-                "Type mismatch, cannot compute modulo of ${a::class.simpleName} and ${b::class.simpleName}")
+            throwWithPosition(
+                position,
+                "Type mismatch, cannot compute modulo of ${a::class.simpleName} and ${b::class.simpleName}"
+            )
         }
     }
 
@@ -170,8 +196,10 @@ abstract class AbstractEvaluator(
         if (a is Int) {
             return +a
         } else {
-            throwWithPosition(position,
-                "Type mismatch, cannot make ${a::class.simpleName} positive")
+            throwWithPosition(
+                position,
+                "Type mismatch, cannot make ${a::class.simpleName} positive"
+            )
         }
     }
 
@@ -179,8 +207,10 @@ abstract class AbstractEvaluator(
         if (a is Int) {
             return -a
         } else {
-            throwWithPosition(position,
-                "Type mismatch, cannot make ${a::class.simpleName} negative")
+            throwWithPosition(
+                position,
+                "Type mismatch, cannot make ${a::class.simpleName} negative"
+            )
         }
     }
 
@@ -188,8 +218,10 @@ abstract class AbstractEvaluator(
         if (a is Boolean) {
             return !a
         } else {
-            throwWithPosition(position,
-                "Type mismatch, cannot compute 'not' on ${a::class.simpleName}")
+            throwWithPosition(
+                position,
+                "Type mismatch, cannot compute 'not' on ${a::class.simpleName}"
+            )
         }
     }
 
@@ -230,15 +262,19 @@ abstract class AbstractEvaluator(
         val actorType = context.actorTypes[node.behaviorName.name]
 
         if (actorType == null) {
-            throwWithPosition(node.startPosition,
-                "Actor type '${node.behaviorName.name}' not declared")
+            throwWithPosition(
+                node.startPosition,
+                "Actor type '${node.behaviorName.name}' not declared"
+            )
         } else {
             if (node.stateValues.size != actorType.stateVarNames.size) {
-                throwWithPosition(node.startPosition,
+                throwWithPosition(
+                    node.startPosition,
                     "Wrong arity in actor type. Previously declared " +
-                            "'${actorType.name}' has an arity of " +
-                            "${actorType.stateVarNames.size} instead of " +
-                            "${node.stateValues.size}")
+                        "'${actorType.name}' has an arity of " +
+                        "${actorType.stateVarNames.size} instead of " +
+                        "${node.stateValues.size}"
+                )
             }
             val stateValues = node.stateValues.map(this::visitExpression).toTypedArray()
             val actor = Actor(actorType, stateValues, context)
@@ -265,8 +301,10 @@ abstract class AbstractEvaluator(
                 node.elseStatements.forEach { visit(it) }
             }
         } else {
-            throwWithPosition(node.startPosition,
-                "Conditions in 'if' must be of boolean type")
+            throwWithPosition(
+                node.startPosition,
+                "Conditions in 'if' must be of boolean type"
+            )
         }
     }
 
@@ -282,8 +320,10 @@ abstract class AbstractEvaluator(
             val message = Message(items)
             context.communicationsManager.send(message, targetActor)
         } else {
-            throwWithPosition(node.startPosition,
-                "Cannot send a message to an object that is not an actor")
+            throwWithPosition(
+                node.startPosition,
+                "Cannot send a message to an object that is not an actor"
+            )
         }
     }
 

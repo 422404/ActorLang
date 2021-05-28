@@ -1,3 +1,3 @@
 package org.actorlang.interpreter.exceptions
 
-class ChangeActorTypeException: Exception()
+class ChangeActorTypeException : Exception()

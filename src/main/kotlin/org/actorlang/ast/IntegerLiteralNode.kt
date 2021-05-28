@@ -6,4 +6,4 @@ class IntegerLiteralNode(
     startPosition: Position,
     endPosition: Position,
     val value: Int
-): ExpressionNode(startPosition, endPosition), MessagePatternItem
+) : ExpressionNode(startPosition, endPosition), MessagePatternItem

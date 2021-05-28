@@ -16,7 +16,7 @@ class PrettyPrinter(
         }
     }
 
-    fun indent(action: ()->Unit) {
+    fun indent(action: () -> Unit) {
         indent()
         action()
         dedent()

@@ -20,7 +20,7 @@ import org.actorlang.ast.visitor.BaseAstVisitor
 class AstPrettyPrinter(
     val node: Node,
     indentSize: Int
-): BaseAstVisitor() {
+) : BaseAstVisitor() {
     private val printer = PrettyPrinter(indentSize)
 
     fun printAst() {

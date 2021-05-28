@@ -8,4 +8,4 @@ class IfNode(
     val condition: ExpressionNode,
     val thenStatements: Array<StatementNode>,
     val elseStatements: Array<StatementNode>
-): StatementNode(startPosition, endPosition)
+) : StatementNode(startPosition, endPosition)
