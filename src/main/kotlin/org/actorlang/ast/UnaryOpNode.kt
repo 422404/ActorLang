@@ -7,4 +7,4 @@ class UnaryOpNode(
     endPosition: Position,
     val operand: ExpressionNode,
     val type: UnaryOpType
-): ExpressionNode(startPosition, endPosition)
+) : ExpressionNode(startPosition, endPosition)

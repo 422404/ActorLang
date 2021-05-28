@@ -12,7 +12,7 @@ class ActorThreadImpl(
     actor: Actor,
     actorMessageQueue: ActorMessageQueue,
     private val context: Context
-): ActorThread(actor, actorMessageQueue) {
+) : ActorThread(actor, actorMessageQueue) {
     private var mustRun = true
 
     override fun run() {
@@ -28,8 +28,11 @@ class ActorThreadImpl(
     }
 
     private fun simulateLatency() {
-        sleep(Random.nextLong(
-            context.configuration.messageLatencyMaxMillis + 1))
+        sleep(
+            Random.nextLong(
+                context.configuration.messageLatencyMaxMillis + 1
+            )
+        )
     }
 
     override fun stopWhenPermitted() {

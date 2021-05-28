@@ -5,7 +5,7 @@ import org.actorlang.interpreter.exceptions.ActorLangRuntimeException
 import org.actorlang.interpreter.objects.Actor
 import kotlin.random.Random
 
-class CommunicationsManager: CommunicationsBinder, CommunicationsSender {
+class CommunicationsManager : CommunicationsBinder, CommunicationsSender {
     private lateinit var context: Context
 
     private val boundActors = mutableMapOf<Actor, ActorMessageQueue>()
@@ -51,13 +51,15 @@ class CommunicationsManager: CommunicationsBinder, CommunicationsSender {
         return messages
     }
 
-    private fun pushMessages(messages: List<Message>,
-                             actorMessageQueue: ActorMessageQueue) {
+    private fun pushMessages(
+        messages: List<Message>,
+        actorMessageQueue: ActorMessageQueue
+    ) {
         val cfg = context.configuration
 
         for (message in messages) {
-            val isOutOfOrder = cfg.outOfOrderMessages
-                    && Random.nextFloat() < cfg.outOfOrderChances
+            val isOutOfOrder = cfg.outOfOrderMessages &&
+                Random.nextFloat() < cfg.outOfOrderChances
 
             if (isOutOfOrder) {
                 actorMessageQueue.pushRandomIndex(message)

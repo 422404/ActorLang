@@ -34,7 +34,7 @@ import org.antlr.v4.runtime.Token
 
 class AntlrParser(
     private val sourceName: String
-): ActorLangBaseVisitor<Node>(), Parser {
+) : ActorLangBaseVisitor<Node>(), Parser {
 
     override fun parse(text: String): RootNode {
         val lexer = ActorLangLexer(CharStreams.fromString(text, sourceName))
@@ -48,17 +48,21 @@ class AntlrParser(
     private fun sourcePosition(token: Token) =
         Position(token.line, token.charPositionInLine, token.inputStream.sourceName)
 
-    private fun createBinaryOpOrExpressionNode(type: BinaryOpType, ctx: ParserRuleContext,
-                                               leftCtx: ParserRuleContext, rightCtx: ParserRuleContext?) =
+    private fun createBinaryOpOrExpressionNode(
+        type: BinaryOpType,
+        ctx: ParserRuleContext,
+        leftCtx: ParserRuleContext,
+        rightCtx: ParserRuleContext?
+    ) =
         when (rightCtx) {
             null -> visit(leftCtx)
             else -> BinaryOpNode(
-                        startPosition = sourcePosition(ctx.start),
-                        endPosition = sourcePosition(ctx.stop),
-                        left = visit(leftCtx) as ExpressionNode,
-                        right = visit(rightCtx) as ExpressionNode,
-                        type
-                    )
+                startPosition = sourcePosition(ctx.start),
+                endPosition = sourcePosition(ctx.stop),
+                left = visit(leftCtx) as ExpressionNode,
+                right = visit(rightCtx) as ExpressionNode,
+                type
+            )
         }
 
     override fun visitLiteral(ctx: ActorLangParser.LiteralContext): Node {
@@ -220,7 +224,7 @@ class AntlrParser(
                     it.Geq() != null -> BinaryOpType.GEQ
                     else -> throw IllegalStateException()
                 }
-            } ?: BinaryOpType.ADD,  // Default type, the node will be stripped
+            } ?: BinaryOpType.ADD, // Default type, the node will be stripped
             ctx, ctx.arithExpr()[0],
             ctx.arithExpr().let { if (it.size == 2) it[1] else null }
         )

@@ -1,3 +1,3 @@
 package org.actorlang.interpreter.exceptions
 
-class ActorLangRuntimeException(msg: String): Exception(msg)
+class ActorLangRuntimeException(msg: String) : Exception(msg)

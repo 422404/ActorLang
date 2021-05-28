@@ -15,7 +15,7 @@ class InterpreterImpl(
     communicationsSender: CommunicationsSender,
     communicationsBinder: CommunicationsBinder,
     scheduler: Scheduler
-): Interpreter {
+) : Interpreter {
     private val context = Context(
         configuration,
         out,

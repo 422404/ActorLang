@@ -2,7 +2,7 @@ package org.actorlang.interpreter.scheduler
 
 import java.lang.Thread.sleep
 
-class SchedulerImpl: Scheduler {
+class SchedulerImpl : Scheduler {
     private val actorThreads = mutableListOf<ActorThread>()
 
     override fun schedule(actorThread: ActorThread) = synchronized(actorThreads) {

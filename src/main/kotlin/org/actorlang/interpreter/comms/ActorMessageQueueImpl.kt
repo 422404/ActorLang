@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit
 import java.util.concurrent.locks.ReentrantLock
 import kotlin.concurrent.withLock
 
-class ActorMessageQueueImpl: ActorMessageQueue {
+class ActorMessageQueueImpl : ActorMessageQueue {
     private val lock = ReentrantLock()
     private val condition = lock.newCondition()
 
@@ -20,7 +20,6 @@ class ActorMessageQueueImpl: ActorMessageQueue {
         messages.push(message)
         condition.signal()
     }
-
 
     override fun pushRandomIndex(message: Message) = lock.withLock {
         messages.add((0..messages.size).random(), message)

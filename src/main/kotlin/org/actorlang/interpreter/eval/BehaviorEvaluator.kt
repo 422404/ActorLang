@@ -15,7 +15,7 @@ class BehaviorEvaluator(
     private val actor: Actor,
     private val messageItems: Array<Any>,
     context: Context
-): AbstractEvaluator(context) {
+) : AbstractEvaluator(context) {
     fun evaluateBehavior(behaviorNode: BehaviorNode) {
         if (behaviorNode.messagePatternItems.size != messageItems.size) {
             throw ActorLangRuntimeException("Wrong behavior message arity")

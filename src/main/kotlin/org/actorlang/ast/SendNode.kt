@@ -7,4 +7,4 @@ class SendNode(
     endPosition: Position,
     val messageItems: Array<ExpressionNode>,
     val target: IdentifierNode
-): StatementNode(startPosition, endPosition)
+) : StatementNode(startPosition, endPosition)

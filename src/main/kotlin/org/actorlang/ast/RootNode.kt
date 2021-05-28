@@ -6,4 +6,4 @@ class RootNode(
     startPosition: Position,
     endPosition: Position,
     val toplevelStatements: Array<StatementNode>
-): Node(startPosition, endPosition)
+) : Node(startPosition, endPosition)

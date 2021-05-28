@@ -6,4 +6,4 @@ class BooleanLiteralNode(
     startPosition: Position,
     endPosition: Position,
     val value: Boolean
-): ExpressionNode(startPosition, endPosition), MessagePatternItem
+) : ExpressionNode(startPosition, endPosition), MessagePatternItem

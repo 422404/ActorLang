@@ -2,7 +2,7 @@ package org.actorlang.interpreter.eval.scopes
 
 import org.actorlang.interpreter.exceptions.ActorLangRuntimeException
 
-class BaseScope(parent: Scope?): Scope(parent) {
+class BaseScope(parent: Scope?) : Scope(parent) {
     private val vars = mutableMapOf<String, Any>()
 
     override fun set(name: String, value: Any) {

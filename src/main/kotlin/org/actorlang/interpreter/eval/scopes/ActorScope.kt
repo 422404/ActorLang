@@ -6,7 +6,7 @@ import org.actorlang.interpreter.objects.Actor
 class ActorScope(
     val actor: Actor,
     parent: Scope?
-): Scope(parent) {
+) : Scope(parent) {
     override fun set(name: String, value: Any) {
         throw ActorLangRuntimeException("Cannot assign values to actor state.")
     }

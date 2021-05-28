@@ -18,7 +18,7 @@ import org.actorlang.ast.SendNode
 import org.actorlang.ast.StringLiteralNode
 import org.actorlang.ast.UnaryOpNode
 
-open class BaseAstVisitor: AstVisitor {
+open class BaseAstVisitor : AstVisitor {
     fun visit(node: Node) = when (node) {
         is AssignNode -> visit(node)
         is BecomeNode -> visit(node)
