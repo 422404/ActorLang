@@ -193,6 +193,12 @@ public interface ActorLangVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIfStmt(ActorLangParser.IfStmtContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link ActorLangParser#forStmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitForStmt(ActorLangParser.ForStmtContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ActorLangParser#createExpr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

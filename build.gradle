@@ -3,6 +3,7 @@ plugins {
     id 'application'
     id 'antlr'
     id 'org.jlleitschuh.gradle.ktlint' version '10.0.0'
+    id 'com.adarshr.test-logger' version '3.0.0'
 }
 
 group = 'org.actorlang'
@@ -26,6 +27,8 @@ dependencies {
     antlr 'org.antlr:antlr4:4.9'
 
     // Tests
+    testImplementation "org.mockito:mockito-core:3.+"
+    testImplementation "org.mockito.kotlin:mockito-kotlin:3.2.0"
     testImplementation 'org.jetbrains.kotlin:kotlin-test-junit5'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.0'
@@ -33,8 +36,6 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    testLogging.showStandardStreams = true
-    testLogging.exceptionFormat = 'full'
 }
 
 compileKotlin {

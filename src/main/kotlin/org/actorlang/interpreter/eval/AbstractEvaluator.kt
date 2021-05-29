@@ -9,6 +9,7 @@ import org.actorlang.ast.BooleanLiteralNode
 import org.actorlang.ast.CreateNode
 import org.actorlang.ast.DisplayNode
 import org.actorlang.ast.ExpressionNode
+import org.actorlang.ast.ForNode
 import org.actorlang.ast.IdentifierNode
 import org.actorlang.ast.IfNode
 import org.actorlang.ast.IntegerLiteralNode
@@ -20,6 +21,7 @@ import org.actorlang.ast.UnaryOpType
 import org.actorlang.ast.visitor.BaseAstVisitor
 import org.actorlang.interpreter.Context
 import org.actorlang.interpreter.comms.Message
+import org.actorlang.interpreter.eval.scopes.BaseScope
 import org.actorlang.interpreter.eval.scopes.Scope
 import org.actorlang.interpreter.exceptions.ActorLangRuntimeException
 import org.actorlang.interpreter.objects.Actor
@@ -285,6 +287,25 @@ abstract class AbstractEvaluator(
 
     override fun visit(node: DisplayNode) {
         context.out.println(visitExpression(node.value))
+    }
+
+    override fun visit(node: ForNode) {
+        activeScopes.add(BaseScope(currentScope))
+        val scope = currentScope
+        val begin = visitExpression(node.range.first)
+        val end = visitExpression(node.range.second)
+        if (begin is Int && end is Int) {
+            val range = if (begin <= end) begin..end else begin downTo end
+            range.forEach { i ->
+                scope[node.variable.name] = i
+                node.statements.forEach { visit(it) }
+            }
+        } else {
+            throwWithPosition(
+                node.startPosition,
+                "A 'for' range must be composed of two integers"
+            )
+        }
     }
 
     override fun visit(node: IdentifierNode) {
