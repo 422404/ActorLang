@@ -164,7 +164,7 @@ class AstPrettyPrinter(
                 } else {
                     println("} else {")
                     indent {
-                        node.thenStatements.forEach {
+                        node.elseStatements.forEach {
                             visit(it)
                         }
                     }
