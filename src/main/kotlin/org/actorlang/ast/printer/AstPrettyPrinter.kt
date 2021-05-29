@@ -7,6 +7,7 @@ import org.actorlang.ast.BinaryOpNode
 import org.actorlang.ast.BooleanLiteralNode
 import org.actorlang.ast.CreateNode
 import org.actorlang.ast.DisplayNode
+import org.actorlang.ast.ForNode
 import org.actorlang.ast.IdentifierNode
 import org.actorlang.ast.IfNode
 import org.actorlang.ast.IntegerLiteralNode
@@ -137,6 +138,26 @@ class AstPrettyPrinter(
             indent {
                 visit(node.value)
                 println()
+            }
+            println("}")
+        }
+    }
+
+    override fun visit(node: ForNode) {
+        printer.apply {
+            println("ForNode {")
+            indent {
+                println("variable = ${node.variable.name}")
+                print("range = ")
+                visit(node.range.first)
+                print("..")
+                visit(node.range.second)
+                println()
+                println("statements = {")
+                indent {
+                    node.statements.forEach { visit(it) }
+                }
+                println("}")
             }
             println("}")
         }

@@ -20,8 +20,10 @@ Send: 'send';
 To: 'to';
 If: 'if';
 Else: 'else';
+For: 'for';
+In: 'in';
 
-Identifier: [a-zA-Z][a-zA-Z0-9_]*;
+Identifier: [a-zA-Z_][a-zA-Z0-9_]*;
 
 LParen: '(';
 RParen: ')';
@@ -140,6 +142,7 @@ behaviorStmt:
     | sendStmt
     | assignStmt
     | ifStmt
+    | forStmt
 ;
 
 displayStmt: Display expr;
@@ -161,6 +164,13 @@ ifStmt:
       RCurly)?
 ;
 
+forStmt:
+      For LParen identifier In begin=atom '..' end=atom RParen
+      LCurly
+        (behaviorStmt (Semi behaviorStmt)* Semi?)?
+      RCurly
+;
+
 createExpr: Create parameterizedBehavior;
 
 parameterizedBehavior: identifier LParen (expr (Comma expr)*)? RParen;
@@ -170,6 +180,7 @@ toplevelStmt:
     | displayStmt
     | sendStmt
     | assignStmt
+    | forStmt
 ;
 
 root: (toplevelStmt (Semi toplevelStmt)* Semi?)? EOF;

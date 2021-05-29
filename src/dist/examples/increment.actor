@@ -2,8 +2,10 @@ Cinc (X) ["inc"] = become Cinc (X + 1);
 Cinc (X) ["show"] = display X;
 
 Inc = create Cinc (25);
-send ["show"] to Inc;
-send ["inc"] to Inc;
-send ["show"] to Inc;
-send ["inc"] to Inc;
-send ["show"] to Inc;
+for (i in 1..9) {
+    if (i % 2 == 0) {
+        send ["inc"] to Inc;
+    } else {
+        send ["show"] to Inc
+    }
+}

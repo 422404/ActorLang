@@ -13,6 +13,7 @@ import org.actorlang.ast.BooleanLiteralNode
 import org.actorlang.ast.CreateNode
 import org.actorlang.ast.DisplayNode
 import org.actorlang.ast.ExpressionNode
+import org.actorlang.ast.ForNode
 import org.actorlang.ast.IdentifierNode
 import org.actorlang.ast.IfNode
 import org.actorlang.ast.IntegerLiteralNode
@@ -150,6 +151,19 @@ class AntlrParser(
             startPosition = sourcePosition(ctx.start),
             endPosition = sourcePosition(ctx.stop),
             value = visit(ctx.expr()) as ExpressionNode
+        )
+    }
+
+    override fun visitForStmt(ctx: ActorLangParser.ForStmtContext): Node {
+        return ForNode(
+            startPosition = sourcePosition(ctx.start),
+            endPosition = sourcePosition(ctx.stop),
+            variable = visit(ctx.identifier()) as IdentifierNode,
+            range = visit(ctx.begin) as ExpressionNode
+                to visit(ctx.end) as ExpressionNode,
+            statements = ctx.behaviorStmt().map {
+                visit(it) as StatementNode
+            }.toTypedArray()
         )
     }
 
