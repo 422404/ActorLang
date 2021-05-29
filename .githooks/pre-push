@@ -1,0 +1,52 @@
+#!/bin/bash
+
+z40=0000000000000000000000000000000000000000
+IFS=' '
+while read local_ref local_sha remote_ref remote_sha
+do
+	if [ "$local_sha" != $z40 ]
+	then
+		if [ "$remote_sha" = $z40 ]
+		then
+			# New branch, examine all commits
+			range="$local_sha"
+		else
+			# Update to existing branch, examine new commits
+			range="$remote_sha..$local_sha"
+		fi
+
+		# Check for WIP commit
+		commit=`git rev-list -n 1 --grep '^[[:space:]]*WIP' "$range"`
+		if [ -n "$commit" ]
+		then
+			echo "Commit $local_sha is marked as WIP. Push aborted."
+            echo
+			exit 1
+		fi
+	fi
+done
+
+# Ensure code style
+cd $(git rev-parse --show-toplevel)
+if ! ./gradlew ktlintCheck; then
+    echo
+    echo "Please follow coding conventions. Push aborted."
+    echo
+    exit 1
+fi
+
+echo
+read -p "Run tests? (y/N) " -n 1 -r CHOICE < /dev/tty
+echo
+if [[ $CHOICE =~ ^[Yy]$ ]]
+then
+    if ! ./gradlew test; then
+        echo
+        echo "Not all tests passed. Push aborted."
+        echo
+        exit 1
+    fi
+fi
+
+exit 0
+
