@@ -1,0 +1,358 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Language syntax &mdash; Actor Lang</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Examples" href="examples.html" />
+    <link rel="prev" title="Actor Lang" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Actor Lang
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Actor Lang</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Language syntax</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#basic-types">Basic types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#maths">Maths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conditional-execution">Conditional execution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#loops">Loops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#printing-data">Printing data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#actor-behavior-definition">Actor behavior definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tagged-messages">Tagged messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#changing-behavior">Changing behavior</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sending-messages">Sending messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#actor-self-reference">Actor self reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-actors-instances">Creating actors instances</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="executing.html">Executing code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="building.html">Building from source</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Actor Lang</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Language syntax</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/syntax.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="language-syntax">
+<h1>Language syntax<a class="headerlink" href="#language-syntax" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="basic-types">
+<h2>Basic types<a class="headerlink" href="#basic-types" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Integers:<code class="docutils literal notranslate"><span class="pre">10</span></code>, <code class="docutils literal notranslate"><span class="pre">-42</span></code>, <code class="docutils literal notranslate"><span class="pre">+1337</span></code></p></li>
+<li><p>Strings: <code class="docutils literal notranslate"><span class="pre">&quot;Hello,</span> <span class="pre">world!&quot;</span></code></p></li>
+<li><p>Booleans: <code class="docutils literal notranslate"><span class="pre">true</span></code>, <code class="docutils literal notranslate"><span class="pre">false</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="maths">
+<h2>Maths<a class="headerlink" href="#maths" title="Permalink to this headline">¶</a></h2>
+<p>Basic maths are supported so you can do arithmetic or boolean logic:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">b</span> <span class="o">*</span> <span class="n">b</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">c</span>
+<span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3</span>
+<span class="n">true</span> <span class="o">||</span> <span class="n">false</span>
+<span class="n">true</span> <span class="o">||</span> <span class="n">false</span> <span class="o">&amp;&amp;</span> <span class="n">myVar</span>
+<span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="conditional-execution">
+<h2>Conditional execution<a class="headerlink" href="#conditional-execution" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="o">...</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="loops">
+<h2>Loops<a class="headerlink" href="#loops" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="ow">in</span> <span class="mf">0..10</span><span class="p">)</span> <span class="p">{</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Iterates in a range from 0 to 10 (inclusive).</p>
+<p>You can also iterate on decreasing values:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="ow">in</span> <span class="mf">10..0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Iterates in a range from 10 to 0 (inclusive).</p>
+<p>You can use «complex» expressions for the range bounds:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="ow">in</span> <span class="n">start</span><span class="o">..</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">))</span> <span class="p">{</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="printing-data">
+<h2>Printing data<a class="headerlink" href="#printing-data" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">display</span> <span class="s2">&quot;hello&quot;</span><span class="p">;</span>
+<span class="n">display</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3</span><span class="p">;</span>
+<span class="n">display</span> <span class="n">true</span> <span class="o">||</span> <span class="n">false</span> <span class="o">&amp;&amp;</span> <span class="n">true</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Prints three lines:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hello</span>
+<span class="mi">9</span>
+<span class="n">true</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="actor-behavior-definition">
+<h2>Actor behavior definition<a class="headerlink" href="#actor-behavior-definition" title="Permalink to this headline">¶</a></h2>
+<p>An actor behavior definition follows this pattern:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">actor</span> <span class="nb">type</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">state</span> <span class="n">var1</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">state</span> <span class="n">varN</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">message</span> <span class="n">item1</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">message</span> <span class="n">itemN</span><span class="o">&gt;</span><span class="p">]</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">statements</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>A behavior is executed when a message matching a pattern is received by an actor.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MyActor</span> <span class="p">()</span> <span class="p">[</span><span class="n">item1</span><span class="p">]</span> <span class="o">=</span> <span class="n">display</span> <span class="n">item1</span><span class="p">;</span>
+
+<span class="n">MyActor</span> <span class="p">(</span><span class="n">State</span><span class="p">)</span> <span class="p">[</span><span class="n">item1</span><span class="p">,</span> <span class="n">item2</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">display</span> <span class="n">item1</span><span class="p">;</span>
+    <span class="n">display</span> <span class="n">item2</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="tagged-messages">
+<h2>Tagged messages<a class="headerlink" href="#tagged-messages" title="Permalink to this headline">¶</a></h2>
+<p>To enable calling the right behavior of an actor with multiple behaviors of the same arity, one can tag the messages with literal values in the patterns.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MyActor</span> <span class="p">()</span> <span class="p">[</span><span class="s2">&quot;display-one&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">display</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">MyActor</span> <span class="p">()</span> <span class="p">[</span><span class="s2">&quot;display-two&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">display</span> <span class="mi">2</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>These behaviors will be executed on receiving a message containing either <code class="docutils literal notranslate"><span class="pre">&quot;display-one&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;display-two&quot;</span></code>.</p>
+</div>
+<div class="section" id="changing-behavior">
+<h2>Changing behavior<a class="headerlink" href="#changing-behavior" title="Permalink to this headline">¶</a></h2>
+<p>An actor can change its type (and so its behavior) based on a received message:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Empty</span> <span class="p">()</span>  <span class="p">[</span><span class="s2">&quot;set&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">become</span> <span class="n">Full</span> <span class="p">(</span><span class="n">x</span><span class="p">);</span>
+
+<span class="n">Full</span> <span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="p">[</span><span class="s2">&quot;get&quot;</span><span class="p">,</span> <span class="n">sender</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">send</span> <span class="p">[</span><span class="n">X</span><span class="p">]</span> <span class="n">to</span> <span class="n">sender</span><span class="p">;</span>
+    <span class="n">become</span> <span class="n">Empty</span> <span class="p">()</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sending-messages">
+<h2>Sending messages<a class="headerlink" href="#sending-messages" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">send</span> <span class="p">[</span><span class="mi">42</span><span class="p">]</span> <span class="n">to</span> <span class="n">anActor</span><span class="p">;</span>
+
+<span class="n">send</span> <span class="p">[</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="mi">1337</span><span class="p">]</span> <span class="n">to</span> <span class="n">anotherActor</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="actor-self-reference">
+<h2>Actor self reference<a class="headerlink" href="#actor-self-reference" title="Permalink to this headline">¶</a></h2>
+<p>In a behavior, the <code class="docutils literal notranslate"><span class="pre">self</span></code> variable is a reference to the actor executing the code.</p>
+</div>
+<div class="section" id="creating-actors-instances">
+<h2>Creating actors instances<a class="headerlink" href="#creating-actors-instances" title="Permalink to this headline">¶</a></h2>
+<p>Instantiating an actor from a given type with a given state (e.g. <code class="docutils literal notranslate"><span class="pre">MyActor</span> <span class="pre">(42)</span></code>) is done like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">myInstantiatedActor</span> <span class="o">=</span> <span class="n">create</span> <span class="n">MyActor</span> <span class="p">(</span><span class="mi">42</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="examples.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Actor Lang" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Elyan Poujol (422404).
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
