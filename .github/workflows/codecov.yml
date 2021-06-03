@@ -1,18 +1,15 @@
-name: Quality Gates
+name: Codecov
 
 on:
   push:
     branches:
       - master
-      - develop
-      - devops/**
   pull_request:
     branches:
       - master
-      - develop
 
 jobs:
-  verify:
+  codecov:
     runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
@@ -22,8 +19,11 @@ jobs:
         java-version: 8
     - uses: eskatos/gradle-command-action@v1
       with:
-        arguments: ktlintCheck
-    - uses: eskatos/gradle-command-action@v1
-      with:
         arguments: test
+    - uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: ./build/reports/jacoco/report.xml
+        name: codecov-actorlang
+        fail_ci_if_error: true
 
