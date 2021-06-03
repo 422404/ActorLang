@@ -1,0 +1,23 @@
+SieveEmpty () [V] = {
+    display V;
+    become SieveLeaf (V)
+};
+
+SieveLeaf (N) [V] =
+    if (V % N != 0) {
+        next = create SieveEmpty ();
+        send [V] to next;
+        become SieveNode (next, N)
+    };
+
+SieveNode (Next, N) [V] = 
+    if (V % N != 0) {
+        send [V] to Next
+    };
+
+
+sieve = create SieveEmpty ();
+for (i in 2..101) {
+    send [i] to sieve
+}
+
