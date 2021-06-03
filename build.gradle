@@ -4,6 +4,7 @@ plugins {
     id 'antlr'
     id 'org.jlleitschuh.gradle.ktlint' version '10.0.0'
     id 'com.adarshr.test-logger' version '3.0.0'
+    id 'jacoco'
 }
 
 group = 'org.actorlang'
@@ -23,6 +24,20 @@ generateGrammarSource {
     outputDirectory = file("src/main/java/")
 }
 
+jacoco {
+    toolVersion = '0.8.7'
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+        xml.destination = file("${buildDir}/reports/jacoco/report.xml")
+        html.enabled = true
+        html.destination = file("${buildDir}/reports/jacoco/html")
+        csv.enabled = false
+    }
+}
+
 dependencies {
     antlr 'org.antlr:antlr4:4.9'
 
@@ -36,6 +51,7 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
 }
 
 compileKotlin {
