@@ -17,7 +17,7 @@ class ActorMessageQueueImpl : ActorMessageQueue {
         }
 
     override fun push(message: Message) = lock.withLock {
-        messages.push(message)
+        messages.add(message)
         condition.signal()
     }
 
