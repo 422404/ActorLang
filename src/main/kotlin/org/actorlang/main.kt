@@ -4,6 +4,7 @@ import org.actorlang.config.Configuration
 import org.actorlang.interpreter.InterpreterImpl
 import org.actorlang.interpreter.comms.CommunicationsManager
 import org.actorlang.interpreter.scheduler.SchedulerImpl
+import org.actorlang.parser.impl.AntlrParserFactory
 import java.io.BufferedReader
 import java.io.File
 import kotlin.system.exitProcess
@@ -46,12 +47,14 @@ private fun execute(code: String, sourceName: String): Int {
     }
     val communicationsManager = CommunicationsManager()
     val scheduler = SchedulerImpl()
+    val parserFactory = AntlrParserFactory()
     val interpreter = InterpreterImpl(
         config,
         System.out,
         communicationsManager,
         communicationsManager,
-        scheduler
+        scheduler,
+        parserFactory
     )
 
     println("---- start system ----")

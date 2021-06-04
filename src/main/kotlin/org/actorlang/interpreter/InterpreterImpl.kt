@@ -6,7 +6,7 @@ import org.actorlang.interpreter.comms.CommunicationsBinder
 import org.actorlang.interpreter.comms.CommunicationsSender
 import org.actorlang.interpreter.eval.RootEvaluator
 import org.actorlang.interpreter.scheduler.Scheduler
-import org.actorlang.parser.impl.AntlrParser
+import org.actorlang.parser.ParserFactory
 import java.io.PrintStream
 
 class InterpreterImpl(
@@ -14,7 +14,8 @@ class InterpreterImpl(
     out: PrintStream,
     communicationsSender: CommunicationsSender,
     communicationsBinder: CommunicationsBinder,
-    scheduler: Scheduler
+    scheduler: Scheduler,
+    private val parserFactory: ParserFactory
 ) : Interpreter {
     private val context = Context(
         configuration,
@@ -30,8 +31,8 @@ class InterpreterImpl(
     private lateinit var rootEvaluator: RootEvaluator
 
     override fun run(source: String, sourceName: String) {
-        val parser = AntlrParser(sourceName)
-        val rootNode = parser.parse(source)
+        val parser = parserFactory.createParser()
+        val rootNode = parser.parse(source, sourceName)
         if (context.configuration.debug) {
             AstPrettyPrinter(rootNode, 2).printAst()
             println()
