@@ -5,6 +5,8 @@ import org.actorlang.interpreter.comms.CommunicationsBinder
 import org.actorlang.interpreter.comms.CommunicationsSender
 import org.actorlang.interpreter.exceptions.ActorLangRuntimeException
 import org.actorlang.interpreter.scheduler.Scheduler
+import org.actorlang.parser.Parser
+import org.actorlang.parser.impl.AntlrParser
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -21,6 +23,7 @@ internal class InterpreterImplTest {
     private lateinit var communicationsSender: CommunicationsSender
     private lateinit var scheduler: Scheduler
     private lateinit var interpreter: Interpreter
+    private lateinit var parser: Parser
 
     private val printedObjects = mutableListOf<Any>()
 
@@ -38,12 +41,14 @@ internal class InterpreterImplTest {
                 printedObjects += it.arguments[0]
             }
         }
+        parser = AntlrParser()
         interpreter = InterpreterImpl(
             config,
             printStream,
             communicationsSender,
             communicationsBinder,
-            scheduler
+            scheduler,
+            parser
         )
     }
 

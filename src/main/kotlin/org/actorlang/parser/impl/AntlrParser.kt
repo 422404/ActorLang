@@ -33,11 +33,9 @@ import org.antlr.v4.runtime.CommonTokenStream
 import org.antlr.v4.runtime.ParserRuleContext
 import org.antlr.v4.runtime.Token
 
-class AntlrParser(
-    private val sourceName: String
-) : ActorLangBaseVisitor<Node>(), Parser {
+class AntlrParser : ActorLangBaseVisitor<Node>(), Parser {
 
-    override fun parse(text: String): RootNode {
+    override fun parse(text: String, sourceName: String): RootNode {
         val lexer = ActorLangLexer(CharStreams.fromString(text, sourceName))
         val parser = ActorLangParser(CommonTokenStream(lexer))
         // remove the default error listener to disable error printing
