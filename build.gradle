@@ -43,6 +43,7 @@ dependencies {
 
     // Tests
     testImplementation "org.mockito:mockito-core:3.+"
+    testImplementation 'org.mockito:mockito-inline:3.11.0'
     testImplementation "org.mockito.kotlin:mockito-kotlin:3.2.0"
     testImplementation 'org.jetbrains.kotlin:kotlin-test-junit5'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
