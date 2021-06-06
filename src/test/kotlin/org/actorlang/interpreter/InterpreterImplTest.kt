@@ -49,6 +49,7 @@ internal class InterpreterImplTest {
             communicationsSender = mock(),
             communicationsBinder = mock(),
             scheduler = mock(),
+            schedulerSynchronization = mock(),
             stubbedParserFactoryAndParser.parserFactory
         )
 
@@ -65,6 +66,7 @@ internal class InterpreterImplTest {
             communicationsSender = mock(),
             communicationsBinder = mock(),
             scheduler = mock(),
+            schedulerSynchronization = mock(),
             stubbedParserFactoryAndParser.parserFactory
         )
 

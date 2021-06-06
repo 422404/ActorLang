@@ -2,9 +2,12 @@ package org.actorlang.interpreter
 
 import org.actorlang.config.Configuration
 import org.actorlang.interpreter.comms.CommunicationsBinder
+import org.actorlang.interpreter.comms.CommunicationsManager
 import org.actorlang.interpreter.comms.CommunicationsSender
 import org.actorlang.interpreter.exceptions.ActorLangRuntimeException
 import org.actorlang.interpreter.scheduler.Scheduler
+import org.actorlang.interpreter.scheduler.SchedulerImpl
+import org.actorlang.interpreter.scheduler.SchedulerSynchronization
 import org.actorlang.parser.impl.AntlrParserFactory
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -32,6 +35,7 @@ class InterpreterImplIT {
         val communicationsBinder = mock<CommunicationsBinder>()
         val communicationsSender = mock<CommunicationsSender>()
         val scheduler = mock<Scheduler>()
+        val schedulerSynchronization = mock<SchedulerSynchronization>()
         val printStream = mock<PrintStream> {
             on {
                 println(any<Any>())
@@ -45,6 +49,37 @@ class InterpreterImplIT {
             printStream,
             communicationsSender,
             communicationsBinder,
+            scheduler,
+            schedulerSynchronization,
+            parserFactory
+        )
+        return InterpreterAndPrintedObjects(interpreter, printedObjects)
+    }
+
+    /**
+     * Creates an interpreter.
+     * The «out» PrintStream is a fake object «printing» into a list in which
+     * items can be retrieved so we can assert the good execution of the program.
+     */
+    private fun createDefaultInterpreter(): InterpreterAndPrintedObjects {
+        val printedObjects = mutableListOf<Any>()
+        val config = Configuration().apply { debug = false }
+        val communicationsManager = CommunicationsManager()
+        val scheduler = SchedulerImpl()
+        val printStream = mock<PrintStream> {
+            on {
+                println(any<Any>())
+            } doAnswer {
+                printedObjects += it.arguments[0]
+            }
+        }
+        val parserFactory = AntlrParserFactory()
+        val interpreter = InterpreterImpl(
+            config,
+            printStream,
+            communicationsManager,
+            communicationsManager,
+            scheduler,
             scheduler,
             parserFactory
         )
