@@ -6,6 +6,7 @@ import org.actorlang.interpreter.comms.CommunicationsBinder
 import org.actorlang.interpreter.comms.CommunicationsSender
 import org.actorlang.interpreter.eval.RootEvaluator
 import org.actorlang.interpreter.scheduler.Scheduler
+import org.actorlang.interpreter.scheduler.SchedulerSynchronization
 import org.actorlang.parser.ParserFactory
 import java.io.PrintStream
 
@@ -15,14 +16,16 @@ class InterpreterImpl(
     communicationsSender: CommunicationsSender,
     communicationsBinder: CommunicationsBinder,
     scheduler: Scheduler,
+    schedulerSynchronization: SchedulerSynchronization,
     private val parserFactory: ParserFactory
 ) : Interpreter {
-    private val context = Context(
+    private val context = ContextImpl(
         configuration,
         out,
         communicationsSender,
         communicationsBinder,
-        scheduler
+        scheduler,
+        schedulerSynchronization
     ).also {
         communicationsSender.setContext(it)
         communicationsBinder.setContext(it)
@@ -38,7 +41,10 @@ class InterpreterImpl(
             println()
         }
         rootEvaluator = RootEvaluator(context)
-        rootEvaluator.evaluateRoot(rootNode)
-        context.scheduler.join()
+        try {
+            rootEvaluator.evaluateRoot(rootNode)
+        } finally {
+            context.scheduler.join()
+        }
     }
 }

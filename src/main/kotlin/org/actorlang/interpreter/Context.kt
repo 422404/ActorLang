@@ -5,14 +5,15 @@ import org.actorlang.interpreter.comms.CommunicationsBinder
 import org.actorlang.interpreter.comms.CommunicationsSender
 import org.actorlang.interpreter.objects.ActorType
 import org.actorlang.interpreter.scheduler.Scheduler
+import org.actorlang.interpreter.scheduler.SchedulerSynchronization
 import java.io.PrintStream
 
-class Context(
-    val configuration: Configuration,
-    val out: PrintStream,
-    val communicationsManager: CommunicationsSender,
-    val communicationsBinder: CommunicationsBinder,
+interface Context {
+    val configuration: Configuration
+    val out: PrintStream
+    val communicationsManager: CommunicationsSender
+    val communicationsBinder: CommunicationsBinder
     val scheduler: Scheduler
-) {
-    val actorTypes = mutableMapOf<String, ActorType>()
+    val schedulerSynchronization: SchedulerSynchronization
+    val actorTypes: MutableMap<String, ActorType>
 }

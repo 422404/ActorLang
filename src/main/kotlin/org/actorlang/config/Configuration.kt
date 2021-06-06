@@ -5,7 +5,7 @@ class Configuration {
     var debug = false
 
     // Latency
-    var messageLatencyMaxMillis by 20L constrained { it >= 0f }
+    var messageLatencyMaxMillis by 20L constrained { it > 0L }
 
     // Messages duplication
     var messageDuplicates = false

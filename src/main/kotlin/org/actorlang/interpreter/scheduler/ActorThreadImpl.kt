@@ -14,6 +14,8 @@ class ActorThreadImpl(
     private val context: Context
 ) : ActorThread(actor, actorMessageQueue) {
     private var mustRun = true
+    override var state = ActorThreadState.RUNNING
+        private set
 
     override fun run() {
         var message: Message?
@@ -21,8 +23,16 @@ class ActorThreadImpl(
         while (mustRun) {
             message = actorMessageQueue.pull(PULL_TIMEOUT_MILLIS)
             if (message != null) {
+                state = ActorThreadState.RUNNING
                 simulateLatency()
-                actor.receive(message)
+                try {
+                    actor.receive(message)
+                } catch (e: Exception) {
+                    context.schedulerSynchronization.execeptionThrown(this, e)
+                }
+            } else {
+                state = ActorThreadState.TIMEOUT
+                context.schedulerSynchronization.pullTimeout(this)
             }
         }
     }
@@ -30,7 +40,7 @@ class ActorThreadImpl(
     private fun simulateLatency() {
         sleep(
             Random.nextLong(
-                context.configuration.messageLatencyMaxMillis + 1
+                context.configuration.messageLatencyMaxMillis
             )
         )
     }

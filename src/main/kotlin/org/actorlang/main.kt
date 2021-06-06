@@ -54,6 +54,7 @@ private fun execute(code: String, sourceName: String): Int {
         communicationsManager,
         communicationsManager,
         scheduler,
+        scheduler,
         parserFactory
     )
 

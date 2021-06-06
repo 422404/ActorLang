@@ -8,6 +8,7 @@ import org.actorlang.interpreter.objects.Actor
 import org.junit.jupiter.api.Test
 import org.mockito.kotlin.any
 import org.mockito.kotlin.doAnswer
+import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
 import org.mockito.kotlin.times
@@ -39,8 +40,14 @@ class ActorThreadImplTest {
                 configuration
             } doAnswer {
                 Configuration().apply {
-                    messageLatencyMaxMillis = 0L
+                    messageLatencyMaxMillis = 1L
                 }
+            }
+
+            on {
+                schedulerSynchronization
+            } doAnswer {
+                mock<SchedulerSynchronization>()
             }
         }
         val actorThread = ActorThreadImpl(actorMock, actorMessageQueueMock, contextMock)
@@ -81,14 +88,23 @@ class ActorThreadImplTest {
                 returnedMessage
             }
         }
+        val schedulerSynchronizationMock = mock<SchedulerSynchronization>() {
+            on { execeptionThrown(any(), any()) } doAnswer {
+                throw it.arguments[1] as Exception
+            }
+        }
         val contextMock = mock<Context> {
             on {
                 configuration
             } doAnswer {
                 Configuration().apply {
-                    messageLatencyMaxMillis = 0L
+                    messageLatencyMaxMillis = 1L
                 }
             }
+
+            on {
+                schedulerSynchronization
+            } doReturn schedulerSynchronizationMock
         }
         val actorThread = ActorThreadImpl(actorMock, actorMessageQueueMock, contextMock)
         actorThread.start()
