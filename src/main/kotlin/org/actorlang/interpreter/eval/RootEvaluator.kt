@@ -39,7 +39,7 @@ class RootEvaluator(
             )
         }
 
-        actorType.behaviors += Behavior(actorType, node)
+        actorType.behaviors += Behavior(actorType, node, currentScope)
     }
 
     override fun visit(node: SelfLiteralNode) {
