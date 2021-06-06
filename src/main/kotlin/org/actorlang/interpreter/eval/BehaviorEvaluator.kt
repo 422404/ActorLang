@@ -7,6 +7,7 @@ import org.actorlang.ast.SelfLiteralNode
 import org.actorlang.interpreter.Context
 import org.actorlang.interpreter.eval.scopes.ActorScope
 import org.actorlang.interpreter.eval.scopes.BaseScope
+import org.actorlang.interpreter.eval.scopes.Scope
 import org.actorlang.interpreter.exceptions.ActorLangRuntimeException
 import org.actorlang.interpreter.exceptions.ChangeActorTypeException
 import org.actorlang.interpreter.objects.Actor
@@ -14,13 +15,15 @@ import org.actorlang.interpreter.objects.Actor
 class BehaviorEvaluator(
     private val actor: Actor,
     private val messageItems: Array<Any>,
-    context: Context
+    context: Context,
+    private val rootScope: Scope
 ) : AbstractEvaluator(context) {
     fun evaluateBehavior(behaviorNode: BehaviorNode) {
         if (behaviorNode.messagePatternItems.size != messageItems.size) {
             throw ActorLangRuntimeException("Wrong behavior message arity")
         }
-        activeScopes.add(ActorScope(actor, null))
+        activeScopes.add(rootScope)
+        activeScopes.add(ActorScope(actor, rootScope))
         activeScopes.add(BaseScope(currentScope))
         initBehaviorScope(behaviorNode)
         visit(behaviorNode)

@@ -15,6 +15,7 @@ import org.mockito.kotlin.any
 import org.mockito.kotlin.doAnswer
 import org.mockito.kotlin.mock
 import java.io.PrintStream
+import kotlin.test.assertContains
 import kotlin.test.assertContentEquals
 
 class InterpreterImplIT {
@@ -127,5 +128,22 @@ class InterpreterImplIT {
                 "<test>"
             )
         }
+    }
+
+    @Test
+    fun `Toplevel variables can be accessed in behaviors`() {
+        val (interpreter, printedObjects) = createDefaultInterpreter()
+        val value = 42
+        interpreter.run(
+            """
+            Actor () ["hello"] = display toplevelVar;
+
+            a = create Actor ();
+            toplevelVar = $value;
+            send ["hello"] to a
+            """.trimIndent(),
+            "<test>"
+        )
+        assertContains(printedObjects, value)
     }
 }
