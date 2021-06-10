@@ -20,6 +20,15 @@ Basic maths are supported so you can do arithmetic or boolean logic::
     true || false && myVar
     x % 2 == 0
 
+String concatenation
+--------------------
+
+Simply «add» any value to a string to concatenate it::
+
+    "Hello" + "world!" --> "Helloworld!"
+    "2 + 2 is " + 4    --> "2 + 2 is 4"
+    "This is " + false --> "This is false"
+
 Conditional execution
 ---------------------
 

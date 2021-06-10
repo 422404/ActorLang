@@ -139,9 +139,11 @@ abstract class AbstractEvaluator(
         }
     }
 
-    private fun add(a: Any, b: Any, position: Position): Int {
+    private fun add(a: Any, b: Any, position: Position): Any {
         if (a is Int && b is Int) {
             return a + b
+        } else if (a is String || b is String) {
+            return "$a$b"
         } else {
             throwWithPosition(
                 position,
