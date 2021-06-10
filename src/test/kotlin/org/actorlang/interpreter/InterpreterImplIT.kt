@@ -1,10 +1,10 @@
 package org.actorlang.interpreter
 
 import org.actorlang.config.Configuration
+import org.actorlang.exceptions.ActorLangRuntimeException
 import org.actorlang.interpreter.comms.CommunicationsBinder
 import org.actorlang.interpreter.comms.CommunicationsManager
 import org.actorlang.interpreter.comms.CommunicationsSender
-import org.actorlang.interpreter.exceptions.ActorLangRuntimeException
 import org.actorlang.interpreter.scheduler.Scheduler
 import org.actorlang.interpreter.scheduler.SchedulerImpl
 import org.actorlang.interpreter.scheduler.SchedulerSynchronization

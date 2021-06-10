@@ -1,6 +1,7 @@
 package org.actorlang
 
 import org.actorlang.config.Configuration
+import org.actorlang.exceptions.ActorLangRuntimeException
 import org.actorlang.interpreter.InterpreterImpl
 import org.actorlang.interpreter.comms.CommunicationsManager
 import org.actorlang.interpreter.scheduler.SchedulerImpl
@@ -39,6 +40,7 @@ fun main(vararg args: String) {
 }
 
 private fun execute(code: String, sourceName: String): Int {
+    var result = 0
     val config = Configuration().apply {
         // debug = true
         // messageDuplicates = true
@@ -59,8 +61,16 @@ private fun execute(code: String, sourceName: String): Int {
     )
 
     println("---- start system ----")
-    interpreter.run(code, sourceName)
+    try {
+        interpreter.run(code, sourceName)
+    } catch (e: ActorLangRuntimeException) {
+        println(e.message)
+        result = -1
+    } catch (e: Exception) {
+        e.printStackTrace()
+        result = -1
+    }
     println("---- stop system -----")
 
-    return 0
+    return result
 }

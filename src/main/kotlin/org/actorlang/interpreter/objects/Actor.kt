@@ -4,10 +4,10 @@ import org.actorlang.ast.BooleanLiteralNode
 import org.actorlang.ast.IdentifierNode
 import org.actorlang.ast.IntegerLiteralNode
 import org.actorlang.ast.StringLiteralNode
+import org.actorlang.exceptions.ActorLangRuntimeException
 import org.actorlang.interpreter.Context
 import org.actorlang.interpreter.comms.ActorMessageQueueImpl
 import org.actorlang.interpreter.comms.Message
-import org.actorlang.interpreter.exceptions.ActorLangRuntimeException
 import org.actorlang.interpreter.scheduler.ActorThreadImpl
 
 class Actor(

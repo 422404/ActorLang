@@ -1,7 +1,7 @@
 package org.actorlang.interpreter.comms
 
+import org.actorlang.exceptions.ActorLangRuntimeException
 import org.actorlang.interpreter.Context
-import org.actorlang.interpreter.exceptions.ActorLangRuntimeException
 import org.actorlang.interpreter.objects.Actor
 import kotlin.random.Random
 
