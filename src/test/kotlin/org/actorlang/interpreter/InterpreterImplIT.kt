@@ -241,4 +241,18 @@ class InterpreterImplIT {
         )
         assertContains(printedObjects, value)
     }
+
+    @Test
+    fun `Commented code is not executed`() {
+        val (interpreter, printedObjects) = createInterpreterWithoutActorCapabilities()
+        interpreter.run(
+            """
+            /*
+            display 42
+            */
+            """.trimIndent(),
+            "<test>"
+        )
+        assertTrue(printedObjects.isEmpty())
+    }
 }

@@ -1,6 +1,18 @@
 Language syntax
 ===============
 
+Comments
+--------
+
+Comments can be added into code like so::
+
+    /* a comment */
+
+    /* A
+     * multi-line
+     * comment
+     */
+
 Basic types
 -----------
 
