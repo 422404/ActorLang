@@ -12,6 +12,7 @@ import org.actorlang.ast.IdentifierNode
 import org.actorlang.ast.IfNode
 import org.actorlang.ast.IntegerLiteralNode
 import org.actorlang.ast.Node
+import org.actorlang.ast.PutNode
 import org.actorlang.ast.SelfLiteralNode
 import org.actorlang.ast.SendNode
 import org.actorlang.ast.StringLiteralNode
@@ -198,6 +199,17 @@ class AstPrettyPrinter(
 
     override fun visit(node: IntegerLiteralNode) {
         printer.print(node.value)
+    }
+
+    override fun visit(node: PutNode) {
+        printer.apply {
+            println("PutNode {")
+            indent {
+                visit(node.value)
+                println()
+            }
+            println("}")
+        }
     }
 
     override fun visit(node: SelfLiteralNode) {

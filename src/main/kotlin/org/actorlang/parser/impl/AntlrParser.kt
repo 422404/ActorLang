@@ -19,6 +19,7 @@ import org.actorlang.ast.IfNode
 import org.actorlang.ast.IntegerLiteralNode
 import org.actorlang.ast.MessagePatternItem
 import org.actorlang.ast.Node
+import org.actorlang.ast.PutNode
 import org.actorlang.ast.RootNode
 import org.actorlang.ast.SelfLiteralNode
 import org.actorlang.ast.SendNode
@@ -184,6 +185,14 @@ class AntlrParser : ActorLangBaseVisitor<Node>(), Parser {
             elseStatements = ctx.elseStmts.map {
                 visit(it) as StatementNode
             }.toTypedArray()
+        )
+    }
+
+    override fun visitPutStmt(ctx: ActorLangParser.PutStmtContext): Node {
+        return PutNode(
+            startPosition = sourcePosition(ctx.start),
+            endPosition = sourcePosition(ctx.stop),
+            value = visit(ctx.expr()) as ExpressionNode
         )
     }
 

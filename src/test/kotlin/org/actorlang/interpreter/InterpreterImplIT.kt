@@ -44,6 +44,12 @@ class InterpreterImplIT {
             } doAnswer {
                 printedObjects += it.arguments[0]
             }
+
+            on {
+                print(any<Any>())
+            } doAnswer {
+                printedObjects += it.arguments[0]
+            }
         }
         val parserFactory = AntlrParserFactory()
         val interpreter = InterpreterImpl(
@@ -71,6 +77,12 @@ class InterpreterImplIT {
         val printStream = mock<PrintStream> {
             on {
                 println(any<Any>())
+            } doAnswer {
+                printedObjects += it.arguments[0]
+            }
+
+            on {
+                print(any<Any>())
             } doAnswer {
                 printedObjects += it.arguments[0]
             }
@@ -215,5 +227,18 @@ class InterpreterImplIT {
             "<test>"
         )
         assertContains(printedObjects, "$boolean$string")
+    }
+
+    @Test
+    fun `Put statement prints a value`() {
+        val (interpreter, printedObjects) = createInterpreterWithoutActorCapabilities()
+        val value = 1337
+        interpreter.run(
+            """
+            put $value
+            """.trimIndent(),
+            "<test>"
+        )
+        assertContains(printedObjects, value)
     }
 }

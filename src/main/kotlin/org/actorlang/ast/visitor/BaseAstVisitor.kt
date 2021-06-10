@@ -13,6 +13,7 @@ import org.actorlang.ast.IfNode
 import org.actorlang.ast.IntegerLiteralNode
 import org.actorlang.ast.MessagePatternItem
 import org.actorlang.ast.Node
+import org.actorlang.ast.PutNode
 import org.actorlang.ast.RootNode
 import org.actorlang.ast.SelfLiteralNode
 import org.actorlang.ast.SendNode
@@ -32,6 +33,7 @@ open class BaseAstVisitor : AstVisitor {
         is IdentifierNode -> visit(node)
         is IfNode -> visit(node)
         is IntegerLiteralNode -> visit(node)
+        is PutNode -> visit(node)
         is RootNode -> visit(node)
         is SelfLiteralNode -> visit(node)
         is SendNode -> visit(node)
@@ -113,6 +115,10 @@ open class BaseAstVisitor : AstVisitor {
     }
 
     override fun visit(node: IntegerLiteralNode) {
+    }
+
+    override fun visit(node: PutNode) {
+        visit(node.value)
     }
 
     override fun visit(node: RootNode) {

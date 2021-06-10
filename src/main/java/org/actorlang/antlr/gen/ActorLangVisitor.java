@@ -169,6 +169,12 @@ public interface ActorLangVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDisplayStmt(ActorLangParser.DisplayStmtContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link ActorLangParser#putStmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPutStmt(ActorLangParser.PutStmtContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ActorLangParser#becomeStmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

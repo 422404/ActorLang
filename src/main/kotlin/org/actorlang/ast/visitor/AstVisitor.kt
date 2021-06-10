@@ -11,6 +11,7 @@ import org.actorlang.ast.ForNode
 import org.actorlang.ast.IdentifierNode
 import org.actorlang.ast.IfNode
 import org.actorlang.ast.IntegerLiteralNode
+import org.actorlang.ast.PutNode
 import org.actorlang.ast.RootNode
 import org.actorlang.ast.SelfLiteralNode
 import org.actorlang.ast.SendNode
@@ -29,6 +30,7 @@ interface AstVisitor {
     fun visit(node: IdentifierNode)
     fun visit(node: IfNode)
     fun visit(node: IntegerLiteralNode)
+    fun visit(node: PutNode)
     fun visit(node: RootNode)
     fun visit(node: SelfLiteralNode)
     fun visit(node: SendNode)
