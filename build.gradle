@@ -36,6 +36,14 @@ jacocoTestReport {
         html.destination = file("${buildDir}/reports/jacoco/html")
         csv.enabled = false
     }
+
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    "org/actorlang/antlr/gen/*"
+            ])
+        }))
+    }
 }
 
 dependencies {

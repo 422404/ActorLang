@@ -1,9 +1,9 @@
 package org.actorlang.parser.impl
 
 import org.actorlang.antlr.ActorLangAntlrErrorListener
-import org.actorlang.antlr.ActorLangBaseVisitor
-import org.actorlang.antlr.ActorLangLexer
-import org.actorlang.antlr.ActorLangParser
+import org.actorlang.antlr.gen.ActorLangBaseVisitor
+import org.actorlang.antlr.gen.ActorLangLexer
+import org.actorlang.antlr.gen.ActorLangParser
 import org.actorlang.ast.AssignNode
 import org.actorlang.ast.BecomeNode
 import org.actorlang.ast.BehaviorNode

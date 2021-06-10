@@ -1,6 +1,6 @@
-// Generated from org/actorlang/antlr/ActorLang.g4 by ANTLR 4.9
+// Generated from org/actorlang/antlr/gen/ActorLang.g4 by ANTLR 4.9
 
-    package org.actorlang.antlr;
+    package org.actorlang.antlr.gen;
 
 
 import org.antlr.v4.runtime.ParserRuleContext;
