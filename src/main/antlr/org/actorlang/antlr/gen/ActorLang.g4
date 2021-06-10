@@ -1,7 +1,7 @@
 grammar ActorLang;
 
 @header {
-    package org.actorlang.antlr;
+    package org.actorlang.antlr.gen;
 }
 
 WS: [ \r\t\n]+ -> channel(HIDDEN);
