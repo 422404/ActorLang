@@ -17,6 +17,7 @@ import org.mockito.kotlin.mock
 import java.io.PrintStream
 import kotlin.test.assertContains
 import kotlin.test.assertContentEquals
+import kotlin.test.assertTrue
 
 class InterpreterImplIT {
 
@@ -145,5 +146,74 @@ class InterpreterImplIT {
             "<test>"
         )
         assertContains(printedObjects, value)
+    }
+
+    @Test
+    fun `Adding two integers makes an integer`() {
+        val (interpreter, printedObjects) = createInterpreterWithoutActorCapabilities()
+        interpreter.run(
+            """
+            display 2 + 2 - 1
+            """.trimIndent(),
+            "<test>"
+        )
+        assertContains(printedObjects, 3)
+    }
+
+    @Test
+    fun `Adding an integer and a boolean is not permitted`() {
+        val (interpreter, printedObjects) = createInterpreterWithoutActorCapabilities()
+
+        assertThrows<ActorLangRuntimeException> {
+            interpreter.run(
+                """
+                display 10 + true
+                """.trimIndent(),
+                "<test>"
+            )
+        }
+        assertTrue(printedObjects.isEmpty())
+    }
+
+    @Test
+    fun `Adding two strings concatenates them`() {
+        val (interpreter, printedObjects) = createInterpreterWithoutActorCapabilities()
+        val string1 = "Hello,"
+        val string2 = "world!"
+        interpreter.run(
+            """
+            display "$string1" + "$string2"
+            """.trimIndent(),
+            "<test>"
+        )
+        assertContains(printedObjects, "$string1$string2")
+    }
+
+    @Test
+    fun `Adding a string with an integer concatenates them`() {
+        val (interpreter, printedObjects) = createInterpreterWithoutActorCapabilities()
+        val string = "Hello "
+        val integer = 42
+        interpreter.run(
+            """
+            display "$string" + $integer
+            """.trimIndent(),
+            "<test>"
+        )
+        assertContains(printedObjects, "$string$integer")
+    }
+
+    @Test
+    fun `Adding a boolean with a string concatenates them`() {
+        val (interpreter, printedObjects) = createInterpreterWithoutActorCapabilities()
+        val string = " indeed..."
+        val boolean = true
+        interpreter.run(
+            """
+            display $boolean + "$string"
+            """.trimIndent(),
+            "<test>"
+        )
+        assertContains(printedObjects, "$boolean$string")
     }
 }
