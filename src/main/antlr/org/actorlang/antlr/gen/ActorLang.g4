@@ -6,6 +6,8 @@ grammar ActorLang;
 
 WS: [ \r\t\n]+ -> channel(HIDDEN);
 
+COMMENT: '/*' .*? '*/' -> channel(HIDDEN);
+
 fragment Digit: [0-9] ;
 IntegerLiteral: Digit+ ;
 StringLiteral: '"' (('\\' .) | ~'"')* '"';
