@@ -201,6 +201,13 @@ public class ActorLangBaseVisitor<T> extends AbstractParseTreeVisitor<T> impleme
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitPutStmt(ActorLangParser.PutStmtContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitBecomeStmt(ActorLangParser.BecomeStmtContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

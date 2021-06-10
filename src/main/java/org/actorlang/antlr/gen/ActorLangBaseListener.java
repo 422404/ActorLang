@@ -330,6 +330,18 @@ public class ActorLangBaseListener implements ActorLangListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterPutStmt(ActorLangParser.PutStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPutStmt(ActorLangParser.PutStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterBecomeStmt(ActorLangParser.BecomeStmtContext ctx) { }
 	/**
 	 * {@inheritDoc}

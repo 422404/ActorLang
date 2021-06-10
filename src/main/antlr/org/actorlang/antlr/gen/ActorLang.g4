@@ -22,6 +22,7 @@ If: 'if';
 Else: 'else';
 For: 'for';
 In: 'in';
+Put: 'put';
 
 Identifier: [a-zA-Z_][a-zA-Z0-9_]*;
 
@@ -143,9 +144,12 @@ behaviorStmt:
     | assignStmt
     | ifStmt
     | forStmt
+    | putStmt
 ;
 
 displayStmt: Display expr;
+
+putStmt: Put expr;
 
 becomeStmt: Become parameterizedBehavior;
 
@@ -181,6 +185,7 @@ toplevelStmt:
     | sendStmt
     | assignStmt
     | forStmt
+    | putStmt
 ;
 
 root: (toplevelStmt (Semi toplevelStmt)* Semi?)? EOF;

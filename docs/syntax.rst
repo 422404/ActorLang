@@ -88,6 +88,18 @@ Prints three lines::
     9
     true
 
+To print values without new lines, you can use:
+
+.. code-block::
+
+   put "hello"
+   put 42
+
+
+Prints::
+
+    hello42
+
 Actor behavior definition
 -------------------------
 

@@ -13,6 +13,7 @@ import org.actorlang.ast.ForNode
 import org.actorlang.ast.IdentifierNode
 import org.actorlang.ast.IfNode
 import org.actorlang.ast.IntegerLiteralNode
+import org.actorlang.ast.PutNode
 import org.actorlang.ast.SelfLiteralNode
 import org.actorlang.ast.SendNode
 import org.actorlang.ast.StringLiteralNode
@@ -333,6 +334,10 @@ abstract class AbstractEvaluator(
 
     override fun visit(node: IntegerLiteralNode) {
         result = node.value
+    }
+
+    override fun visit(node: PutNode) {
+        context.out.print(visitExpression(node.value))
     }
 
     override fun visit(node: SendNode) {
