@@ -19,11 +19,11 @@ import org.actorlang.ast.StringLiteralNode
 import org.actorlang.ast.UnaryOpNode
 import org.actorlang.ast.UnaryOpType
 import org.actorlang.ast.visitor.BaseAstVisitor
+import org.actorlang.exceptions.ActorLangRuntimeException
 import org.actorlang.interpreter.Context
 import org.actorlang.interpreter.comms.Message
 import org.actorlang.interpreter.eval.scopes.BaseScope
 import org.actorlang.interpreter.eval.scopes.Scope
-import org.actorlang.interpreter.exceptions.ActorLangRuntimeException
 import org.actorlang.interpreter.objects.Actor
 import org.actorlang.parser.Position
 import java.util.LinkedList

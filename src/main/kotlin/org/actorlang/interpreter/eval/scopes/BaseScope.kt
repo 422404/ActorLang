@@ -1,6 +1,6 @@
 package org.actorlang.interpreter.eval.scopes
 
-import org.actorlang.interpreter.exceptions.ActorLangRuntimeException
+import org.actorlang.exceptions.ActorLangRuntimeException
 
 class BaseScope(parent: Scope?) : Scope(parent) {
     private val vars = mutableMapOf<String, Any>()

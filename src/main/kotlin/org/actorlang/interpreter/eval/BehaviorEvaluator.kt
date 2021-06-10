@@ -4,11 +4,11 @@ import org.actorlang.ast.BecomeNode
 import org.actorlang.ast.BehaviorNode
 import org.actorlang.ast.IdentifierNode
 import org.actorlang.ast.SelfLiteralNode
+import org.actorlang.exceptions.ActorLangRuntimeException
 import org.actorlang.interpreter.Context
 import org.actorlang.interpreter.eval.scopes.ActorScope
 import org.actorlang.interpreter.eval.scopes.BaseScope
 import org.actorlang.interpreter.eval.scopes.Scope
-import org.actorlang.interpreter.exceptions.ActorLangRuntimeException
 import org.actorlang.interpreter.exceptions.ChangeActorTypeException
 import org.actorlang.interpreter.objects.Actor
 
