@@ -112,6 +112,38 @@ Prints::
 
     hello42
 
+Defining functions
+------------------
+
+Functions can be defined following this pattern::
+
+    fun <function name> (<arg 1>, ..., <arg N>) = <expression> | <statements>
+
+Example:
+
+.. code-block::
+
+   fun mul(x, y) = x * y;
+
+   fun print(s) = {
+       display s
+   };
+
+   fun spawnActor(x) = {
+       a = create Actor(x);
+       return a
+   }
+
+Functions can be called as part of expressions or with the ``call`` statement::
+
+    fun print(value, printer) = send [value] to printer;
+
+    Printer () [value] = display value;
+    p = create Printer ();
+
+    v = F(x, y) * H(y) + x;
+    call print(v, p)
+
 Actor behavior definition
 -------------------------
 
