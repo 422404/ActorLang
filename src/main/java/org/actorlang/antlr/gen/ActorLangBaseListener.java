@@ -462,6 +462,18 @@ public class ActorLangBaseListener implements ActorLangListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCallStmt(ActorLangParser.CallStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCallStmt(ActorLangParser.CallStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterCreateExpr(ActorLangParser.CreateExprContext ctx) { }
 	/**
 	 * {@inheritDoc}

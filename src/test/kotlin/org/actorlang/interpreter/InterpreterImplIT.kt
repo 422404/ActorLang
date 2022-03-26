@@ -354,4 +354,21 @@ class InterpreterImplIT {
         )
         assertContains(printedObjects, Unit)
     }
+
+    @Test
+    fun `Functions can be called with 'call' to discard their return value`() {
+        val (interpreter, printedObjects) = createInterpreterWithoutActorCapabilities()
+        val text = "Hello there"
+        interpreter.run(
+            """
+            fun greet() = {
+                display "$text"
+            };
+            
+            call greet()
+            """.trimIndent(),
+            "<test>"
+        )
+        assertContains(printedObjects, text)
+    }
 }

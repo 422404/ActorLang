@@ -380,6 +380,16 @@ public interface ActorLangListener extends ParseTreeListener {
 	 */
 	void exitFunCall(ActorLangParser.FunCallContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ActorLangParser#callStmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterCallStmt(ActorLangParser.CallStmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ActorLangParser#callStmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitCallStmt(ActorLangParser.CallStmtContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ActorLangParser#createExpr}.
 	 * @param ctx the parse tree
 	 */

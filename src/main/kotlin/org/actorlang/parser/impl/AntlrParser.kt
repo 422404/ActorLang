@@ -10,6 +10,7 @@ import org.actorlang.ast.BehaviorNode
 import org.actorlang.ast.BinaryOpNode
 import org.actorlang.ast.BinaryOpType
 import org.actorlang.ast.BooleanLiteralNode
+import org.actorlang.ast.CallNode
 import org.actorlang.ast.CreateNode
 import org.actorlang.ast.DisplayNode
 import org.actorlang.ast.ExpressionNode
@@ -241,6 +242,14 @@ class AntlrParser : ActorLangBaseVisitor<Node>(), Parser {
                         visit(statement) as StatementNode
                     }.toTypedArray()
             }
+        )
+    }
+
+    override fun visitCallStmt(ctx: ActorLangParser.CallStmtContext): Node {
+        return CallNode(
+            startPosition = sourcePosition(ctx.start),
+            endPosition = sourcePosition(ctx.stop),
+            functionCall = visit(ctx.funCall()) as FunctionCallNode
         )
     }
 

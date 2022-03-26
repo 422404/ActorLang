@@ -5,6 +5,7 @@ import org.actorlang.ast.BecomeNode
 import org.actorlang.ast.BehaviorNode
 import org.actorlang.ast.BinaryOpNode
 import org.actorlang.ast.BooleanLiteralNode
+import org.actorlang.ast.CallNode
 import org.actorlang.ast.CreateNode
 import org.actorlang.ast.DisplayNode
 import org.actorlang.ast.ForNode
@@ -218,6 +219,16 @@ class AstPrettyPrinter(
                     }
                 }
                 println("}")
+            }
+            println("}")
+        }
+    }
+
+    override fun visit(node: CallNode) {
+        printer.apply {
+            println("CallNode {")
+            indent {
+                visit(node.functionCall)
             }
             println("}")
         }

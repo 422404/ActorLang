@@ -27,6 +27,7 @@ In: 'in';
 Put: 'put';
 Fun: 'fun';
 Return: 'return';
+Call: 'call';
 
 Identifier: [a-zA-Z_][a-zA-Z0-9_]*;
 
@@ -150,6 +151,7 @@ behaviorStmt:
     | ifBehaviorStmt
     | forStmt
     | putStmt
+    | callStmt
 ;
 
 displayStmt: Display expr;
@@ -204,11 +206,14 @@ funStmt:
     | ifFunStmt
     | forStmt
     | returnStmt
+    | callStmt
 ;
 
 returnStmt: Return expr;
 
 funCall: identifier LParen (expr (Comma expr)*)? RParen;
+
+callStmt: Call funCall;
 
 createExpr: Create parameterizedBehavior;
 
@@ -222,6 +227,7 @@ toplevelStmt:
     | assignStmt
     | forStmt
     | putStmt
+    | callStmt
 ;
 
 root: (toplevelStmt (Semi toplevelStmt)* Semi?)? EOF;

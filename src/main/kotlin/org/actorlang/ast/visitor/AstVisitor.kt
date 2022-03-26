@@ -5,6 +5,7 @@ import org.actorlang.ast.BecomeNode
 import org.actorlang.ast.BehaviorNode
 import org.actorlang.ast.BinaryOpNode
 import org.actorlang.ast.BooleanLiteralNode
+import org.actorlang.ast.CallNode
 import org.actorlang.ast.CreateNode
 import org.actorlang.ast.DisplayNode
 import org.actorlang.ast.ForNode
@@ -33,6 +34,7 @@ interface AstVisitor {
     fun visit(node: ReturnNode)
     fun visit(node: FunctionCallNode)
     fun visit(node: FunctionDefNode)
+    fun visit(node: CallNode)
     fun visit(node: IdentifierNode)
     fun visit(node: IfNode)
     fun visit(node: IntegerLiteralNode)

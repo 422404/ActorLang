@@ -6,6 +6,7 @@ import org.actorlang.ast.BehaviorNode
 import org.actorlang.ast.BinaryOpNode
 import org.actorlang.ast.BinaryOpType
 import org.actorlang.ast.BooleanLiteralNode
+import org.actorlang.ast.CallNode
 import org.actorlang.ast.CreateNode
 import org.actorlang.ast.DisplayNode
 import org.actorlang.ast.ExpressionNode
@@ -334,6 +335,11 @@ abstract class AbstractEvaluator(
             node.args.map { visitExpression(it) }.toTypedArray(),
             context
         )
+    }
+
+    override fun visit(node: CallNode) {
+        visit(node.functionCall)
+        result = Unit
     }
 
     override fun visit(node: IdentifierNode) {
