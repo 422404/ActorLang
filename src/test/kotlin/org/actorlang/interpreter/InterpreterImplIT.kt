@@ -5,6 +5,7 @@ import org.actorlang.exceptions.ActorLangRuntimeException
 import org.actorlang.interpreter.comms.CommunicationsBinder
 import org.actorlang.interpreter.comms.CommunicationsManager
 import org.actorlang.interpreter.comms.CommunicationsSender
+import org.actorlang.interpreter.exceptions.WrongFunctionArityException
 import org.actorlang.interpreter.scheduler.Scheduler
 import org.actorlang.interpreter.scheduler.SchedulerImpl
 import org.actorlang.interpreter.scheduler.SchedulerSynchronization
@@ -254,5 +255,103 @@ class InterpreterImplIT {
             "<test>"
         )
         assertTrue(printedObjects.isEmpty())
+    }
+
+    @Test
+    fun `A previously defined function can be called`() {
+        val (interpreter, printedObjects) = createInterpreterWithoutActorCapabilities()
+        val value = 3
+        interpreter.run(
+            """
+            fun F(x) = x * x;
+            
+            display F($value)
+            """.trimIndent(),
+            "<test>"
+        )
+        assertContains(printedObjects, value * value)
+    }
+
+    @Test
+    fun `A function returns on its first executed return statement`() {
+        val (interpreter, printedObjects) = createInterpreterWithoutActorCapabilities()
+        val value = 314
+        interpreter.run(
+            """
+            fun F() = {
+                return $value;
+                return 1337;
+                return 42
+            };
+            
+            display F()
+            """.trimIndent(),
+            "<test>"
+        )
+        assertContains(printedObjects, value)
+    }
+
+    @Test
+    fun `Function arity is checked (right arity)`() {
+        val (interpreter, printedObjects) = createInterpreterWithoutActorCapabilities()
+        val value1 = 123
+        val value2 = 321
+        interpreter.run(
+            """
+            fun F(a, b) = a + b;
+            
+            display F($value1, $value2)
+            """.trimIndent(),
+            "<test>"
+        )
+        assertContains(printedObjects, value1 + value2)
+    }
+
+    @Test
+    fun `Function arity is checked (wrong arity)`() {
+        val (interpreter, _) = createInterpreterWithoutActorCapabilities()
+        assertThrows<WrongFunctionArityException> {
+            interpreter.run(
+                """
+                fun F(a, b) = a + b;
+                
+                display F(123)
+                """.trimIndent(),
+                "<test>"
+            )
+        }
+    }
+
+    @Test
+    fun `Functions can be recursive`() {
+        val (interpreter, printedObjects) = createInterpreterWithoutActorCapabilities()
+        interpreter.run(
+            """
+            fun fact(n) =
+                if (n < 2) {
+                    return 1
+                } else {
+                    return n * fact(n - 1)
+                };
+            
+            display fact(5)
+            """.trimIndent(),
+            "<test>"
+        )
+        assertContains(printedObjects, 120)
+    }
+
+    @Test
+    fun `Functions with no 'return' statement implicitly return Unit`() {
+        val (interpreter, printedObjects) = createInterpreterWithoutActorCapabilities()
+        interpreter.run(
+            """
+            fun F() = {};
+            
+            display F()
+            """.trimIndent(),
+            "<test>"
+        )
+        assertContains(printedObjects, Unit)
     }
 }

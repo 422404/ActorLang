@@ -2,6 +2,7 @@ package org.actorlang.interpreter.eval
 
 import org.actorlang.ast.BecomeNode
 import org.actorlang.ast.BehaviorNode
+import org.actorlang.ast.FunctionDefNode
 import org.actorlang.ast.IdentifierNode
 import org.actorlang.ast.SelfLiteralNode
 import org.actorlang.exceptions.ActorLangRuntimeException
@@ -55,5 +56,12 @@ class BehaviorEvaluator(
 
     override fun visit(node: SelfLiteralNode) {
         result = actor
+    }
+
+    override fun visit(node: FunctionDefNode) {
+        throwWithPosition(
+            node.startPosition,
+            "Cannot define a function inside of a behavior"
+        )
     }
 }

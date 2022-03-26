@@ -1,6 +1,6 @@
 // Generated from org/actorlang/antlr/gen/ActorLang.g4 by ANTLR 4.9
 
-    package org.actorlang.antlr.gen;
+package org.actorlang.antlr.gen;
 
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -193,17 +193,47 @@ public interface ActorLangVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAssignStmt(ActorLangParser.AssignStmtContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ActorLangParser#ifStmt}.
+	 * Visit a parse tree produced by {@link ActorLangParser#ifBehaviorStmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitIfStmt(ActorLangParser.IfStmtContext ctx);
+	T visitIfBehaviorStmt(ActorLangParser.IfBehaviorStmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ActorLangParser#ifFunStmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIfFunStmt(ActorLangParser.IfFunStmtContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ActorLangParser#forStmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitForStmt(ActorLangParser.ForStmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ActorLangParser#funDef}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunDef(ActorLangParser.FunDefContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ActorLangParser#funStmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunStmt(ActorLangParser.FunStmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ActorLangParser#returnStmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitReturnStmt(ActorLangParser.ReturnStmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ActorLangParser#funCall}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunCall(ActorLangParser.FunCallContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ActorLangParser#createExpr}.
 	 * @param ctx the parse tree

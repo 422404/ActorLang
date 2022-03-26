@@ -3,6 +3,7 @@ package org.actorlang.interpreter
 import org.actorlang.config.Configuration
 import org.actorlang.interpreter.comms.CommunicationsBinder
 import org.actorlang.interpreter.comms.CommunicationsSender
+import org.actorlang.interpreter.objects.ActorLangFunction
 import org.actorlang.interpreter.objects.ActorType
 import org.actorlang.interpreter.scheduler.Scheduler
 import org.actorlang.interpreter.scheduler.SchedulerSynchronization
@@ -17,4 +18,5 @@ class ContextImpl(
     override val schedulerSynchronization: SchedulerSynchronization
 ) : Context {
     override val actorTypes = mutableMapOf<String, ActorType>()
+    override val functions = mutableMapOf<String, ActorLangFunction>()
 }

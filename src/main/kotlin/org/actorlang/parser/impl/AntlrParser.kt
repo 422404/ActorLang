@@ -14,12 +14,15 @@ import org.actorlang.ast.CreateNode
 import org.actorlang.ast.DisplayNode
 import org.actorlang.ast.ExpressionNode
 import org.actorlang.ast.ForNode
+import org.actorlang.ast.FunctionCallNode
+import org.actorlang.ast.FunctionDefNode
 import org.actorlang.ast.IdentifierNode
 import org.actorlang.ast.IfNode
 import org.actorlang.ast.IntegerLiteralNode
 import org.actorlang.ast.MessagePatternItem
 import org.actorlang.ast.Node
 import org.actorlang.ast.PutNode
+import org.actorlang.ast.ReturnNode
 import org.actorlang.ast.RootNode
 import org.actorlang.ast.SelfLiteralNode
 import org.actorlang.ast.SendNode
@@ -174,7 +177,7 @@ class AntlrParser : ActorLangBaseVisitor<Node>(), Parser {
         )
     }
 
-    override fun visitIfStmt(ctx: ActorLangParser.IfStmtContext): Node {
+    override fun visitIfBehaviorStmt(ctx: ActorLangParser.IfBehaviorStmtContext): Node {
         return IfNode(
             startPosition = sourcePosition(ctx.start),
             endPosition = sourcePosition(ctx.stop),
@@ -185,6 +188,59 @@ class AntlrParser : ActorLangBaseVisitor<Node>(), Parser {
             elseStatements = ctx.elseStmts.map {
                 visit(it) as StatementNode
             }.toTypedArray()
+        )
+    }
+
+    override fun visitIfFunStmt(ctx: ActorLangParser.IfFunStmtContext): Node {
+        return IfNode(
+            startPosition = sourcePosition(ctx.start),
+            endPosition = sourcePosition(ctx.stop),
+            condition = visit(ctx.expr()) as ExpressionNode,
+            thenStatements = ctx.thenStmts.map {
+                visit(it) as StatementNode
+            }.toTypedArray(),
+            elseStatements = ctx.elseStmts.map {
+                visit(it) as StatementNode
+            }.toTypedArray()
+        )
+    }
+
+    override fun visitReturnStmt(ctx: ActorLangParser.ReturnStmtContext): Node {
+        return ReturnNode(
+            startPosition = sourcePosition(ctx.start),
+            endPosition = sourcePosition(ctx.stop),
+            expression = visit(ctx.expr()) as ExpressionNode
+        )
+    }
+
+    override fun visitFunCall(ctx: ActorLangParser.FunCallContext): Node {
+        return FunctionCallNode(
+            startPosition = sourcePosition(ctx.start),
+            endPosition = sourcePosition(ctx.stop),
+            functionName = visit(ctx.identifier()) as IdentifierNode,
+            args = ctx.expr().map {
+                visit(it) as ExpressionNode
+            }.toTypedArray()
+        )
+    }
+
+    override fun visitFunDef(ctx: ActorLangParser.FunDefContext): Node {
+        return FunctionDefNode(
+            startPosition = sourcePosition(ctx.start),
+            endPosition = sourcePosition(ctx.stop),
+            functionName = visit(ctx.name) as IdentifierNode,
+            argsNames = ctx.args.map {
+                visit(it) as IdentifierNode
+            }.toTypedArray(),
+            returnExpression = ctx.expr()?.let { visit(it) } as ExpressionNode?,
+            statements = ctx.funStmt().let {
+                if (it.isEmpty())
+                    null
+                else
+                    it.map { statement ->
+                        visit(statement) as StatementNode
+                    }.toTypedArray()
+            }
         )
     }
 

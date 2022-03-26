@@ -8,11 +8,14 @@ import org.actorlang.ast.BooleanLiteralNode
 import org.actorlang.ast.CreateNode
 import org.actorlang.ast.DisplayNode
 import org.actorlang.ast.ForNode
+import org.actorlang.ast.FunctionCallNode
+import org.actorlang.ast.FunctionDefNode
 import org.actorlang.ast.IdentifierNode
 import org.actorlang.ast.IfNode
 import org.actorlang.ast.IntegerLiteralNode
 import org.actorlang.ast.Node
 import org.actorlang.ast.PutNode
+import org.actorlang.ast.ReturnNode
 import org.actorlang.ast.SelfLiteralNode
 import org.actorlang.ast.SendNode
 import org.actorlang.ast.StringLiteralNode
@@ -157,6 +160,62 @@ class AstPrettyPrinter(
                 println("statements = {")
                 indent {
                     node.statements.forEach { visit(it) }
+                }
+                println("}")
+            }
+            println("}")
+        }
+    }
+
+    override fun visit(node: ReturnNode) {
+        printer.apply {
+            println("ReturnNode {")
+            indent {
+                visit(node.expression)
+                println()
+            }
+            println("}")
+        }
+    }
+
+    override fun visit(node: FunctionCallNode) {
+        printer.apply {
+            println("FunctionCallNode {")
+            indent {
+                println("functionName = ${node.functionName.name}")
+                println("args = {")
+                indent {
+                    node.args.forEach { visit(it) }
+                }
+                println("}")
+            }
+            println("}")
+        }
+    }
+
+    override fun visit(node: FunctionDefNode) {
+        printer.apply {
+            println("FunctionDefNode {")
+            indent {
+                println("functionName = ${node.functionName.name}")
+                println("args = {")
+                indent {
+                    node.argsNames.forEachIndexed { i, argName ->
+                        print(argName.name)
+                        if (i < node.argsNames.size - 1) {
+                            print(", ")
+                        }
+                    }
+                }
+                println()
+                println("}")
+                println("statements = {")
+                indent {
+                    if (node.returnExpression != null) {
+                        visit(node.returnExpression)
+                    } else {
+                        node.statements?.forEach { visit(it) }
+                    }
                 }
                 println("}")
             }

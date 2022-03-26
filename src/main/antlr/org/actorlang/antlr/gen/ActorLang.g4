@@ -1,7 +1,7 @@
 grammar ActorLang;
 
 @header {
-    package org.actorlang.antlr.gen;
+package org.actorlang.antlr.gen;
 }
 
 WS: [ \r\t\n]+ -> channel(HIDDEN);
@@ -25,6 +25,8 @@ Else: 'else';
 For: 'for';
 In: 'in';
 Put: 'put';
+Fun: 'fun';
+Return: 'return';
 
 Identifier: [a-zA-Z_][a-zA-Z0-9_]*;
 
@@ -110,6 +112,7 @@ unary:
 atom:
       literal
     | identifier
+    | funCall
     | parenExpression
 ;
 
@@ -144,7 +147,7 @@ behaviorStmt:
     | becomeStmt
     | sendStmt
     | assignStmt
-    | ifStmt
+    | ifBehaviorStmt
     | forStmt
     | putStmt
 ;
@@ -159,7 +162,7 @@ sendStmt: Send LBracket (expr (Comma expr)*)? RBracket To identifier;
 
 assignStmt: identifier Assign expr;
 
-ifStmt:
+ifBehaviorStmt:
       If LParen expr RParen
       LCurly
         (thenStmts+=behaviorStmt (Semi thenStmts+=behaviorStmt)* Semi?)?
@@ -170,6 +173,17 @@ ifStmt:
       RCurly)?
 ;
 
+ifFunStmt:
+      If LParen expr RParen
+      LCurly
+        (thenStmts+=funStmt (Semi thenStmts+=funStmt)* Semi?)?
+      RCurly
+      (Else
+      LCurly
+        (elseStmts+=funStmt (Semi elseStmts+=funStmt)* Semi?)?
+      RCurly)?
+;
+
 forStmt:
       For LParen identifier In begin=atom '..' end=atom RParen
       LCurly
@@ -177,12 +191,32 @@ forStmt:
       RCurly
 ;
 
+funDef:
+      Fun name=identifier LParen (args+=identifier (Comma args+=identifier)*)? RParen
+      Assign (expr | funStmt | (LCurly (funStmt (Semi funStmt)* Semi?)? RCurly))
+;
+
+funStmt:
+      displayStmt
+    | putStmt
+    | sendStmt
+    | assignStmt
+    | ifFunStmt
+    | forStmt
+    | returnStmt
+;
+
+returnStmt: Return expr;
+
+funCall: identifier LParen (expr (Comma expr)*)? RParen;
+
 createExpr: Create parameterizedBehavior;
 
 parameterizedBehavior: identifier LParen (expr (Comma expr)*)? RParen;
 
 toplevelStmt:
       behavior
+    | funDef
     | displayStmt
     | sendStmt
     | assignStmt
