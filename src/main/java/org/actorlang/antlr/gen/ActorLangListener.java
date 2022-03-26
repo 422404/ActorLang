@@ -1,6 +1,6 @@
 // Generated from org/actorlang/antlr/gen/ActorLang.g4 by ANTLR 4.9
 
-    package org.actorlang.antlr.gen;
+package org.actorlang.antlr.gen;
 
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -310,15 +310,25 @@ public interface ActorLangListener extends ParseTreeListener {
 	 */
 	void exitAssignStmt(ActorLangParser.AssignStmtContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ActorLangParser#ifStmt}.
+	 * Enter a parse tree produced by {@link ActorLangParser#ifBehaviorStmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterIfStmt(ActorLangParser.IfStmtContext ctx);
+	void enterIfBehaviorStmt(ActorLangParser.IfBehaviorStmtContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ActorLangParser#ifStmt}.
+	 * Exit a parse tree produced by {@link ActorLangParser#ifBehaviorStmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitIfStmt(ActorLangParser.IfStmtContext ctx);
+	void exitIfBehaviorStmt(ActorLangParser.IfBehaviorStmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ActorLangParser#ifFunStmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterIfFunStmt(ActorLangParser.IfFunStmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ActorLangParser#ifFunStmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitIfFunStmt(ActorLangParser.IfFunStmtContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ActorLangParser#forStmt}.
 	 * @param ctx the parse tree
@@ -329,6 +339,56 @@ public interface ActorLangListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitForStmt(ActorLangParser.ForStmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ActorLangParser#funDef}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunDef(ActorLangParser.FunDefContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ActorLangParser#funDef}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunDef(ActorLangParser.FunDefContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ActorLangParser#funStmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunStmt(ActorLangParser.FunStmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ActorLangParser#funStmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunStmt(ActorLangParser.FunStmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ActorLangParser#returnStmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterReturnStmt(ActorLangParser.ReturnStmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ActorLangParser#returnStmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitReturnStmt(ActorLangParser.ReturnStmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ActorLangParser#funCall}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunCall(ActorLangParser.FunCallContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ActorLangParser#funCall}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunCall(ActorLangParser.FunCallContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ActorLangParser#callStmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterCallStmt(ActorLangParser.CallStmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ActorLangParser#callStmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitCallStmt(ActorLangParser.CallStmtContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ActorLangParser#createExpr}.
 	 * @param ctx the parse tree

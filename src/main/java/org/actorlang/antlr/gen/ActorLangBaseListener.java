@@ -1,6 +1,6 @@
 // Generated from org/actorlang/antlr/gen/ActorLang.g4 by ANTLR 4.9
 
-    package org.actorlang.antlr.gen;
+package org.actorlang.antlr.gen;
 
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -378,13 +378,25 @@ public class ActorLangBaseListener implements ActorLangListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIfStmt(ActorLangParser.IfStmtContext ctx) { }
+	@Override public void enterIfBehaviorStmt(ActorLangParser.IfBehaviorStmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitIfStmt(ActorLangParser.IfStmtContext ctx) { }
+	@Override public void exitIfBehaviorStmt(ActorLangParser.IfBehaviorStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIfFunStmt(ActorLangParser.IfFunStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIfFunStmt(ActorLangParser.IfFunStmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -397,6 +409,66 @@ public class ActorLangBaseListener implements ActorLangListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitForStmt(ActorLangParser.ForStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunDef(ActorLangParser.FunDefContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunDef(ActorLangParser.FunDefContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunStmt(ActorLangParser.FunStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunStmt(ActorLangParser.FunStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterReturnStmt(ActorLangParser.ReturnStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitReturnStmt(ActorLangParser.ReturnStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunCall(ActorLangParser.FunCallContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunCall(ActorLangParser.FunCallContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCallStmt(ActorLangParser.CallStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCallStmt(ActorLangParser.CallStmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

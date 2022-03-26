@@ -1,0 +1,29 @@
+/*
+ * F(x, y) = G(x) + H(x, y) + 2
+ * G(x) = x^3
+ * H(x, y) = y^2 - x
+ */
+
+G (receiver) [x] = send [x * x * x] to receiver;
+
+H (receiver) [x, y] = send [(y * y) - x] to receiver;
+
+Adder_1 (printer) [a] = become Adder_2 (printer, a);
+Adder_2 (printer, a) [b] = {
+    send [a + b + 2] to printer;
+    become Adder_1 (printer)
+};
+
+Printer () [text] = display text;
+
+fun F(x, y) = {
+    p = create Printer ();
+    a = create Adder_1 (p);
+    g = create G (a);
+    h = create H (a);
+
+    send [x] to g;
+    send [x, y] to h
+};
+
+call F(3, 4)

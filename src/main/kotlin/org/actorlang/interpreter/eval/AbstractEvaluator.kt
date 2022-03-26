@@ -6,14 +6,18 @@ import org.actorlang.ast.BehaviorNode
 import org.actorlang.ast.BinaryOpNode
 import org.actorlang.ast.BinaryOpType
 import org.actorlang.ast.BooleanLiteralNode
+import org.actorlang.ast.CallNode
 import org.actorlang.ast.CreateNode
 import org.actorlang.ast.DisplayNode
 import org.actorlang.ast.ExpressionNode
 import org.actorlang.ast.ForNode
+import org.actorlang.ast.FunctionCallNode
+import org.actorlang.ast.FunctionDefNode
 import org.actorlang.ast.IdentifierNode
 import org.actorlang.ast.IfNode
 import org.actorlang.ast.IntegerLiteralNode
 import org.actorlang.ast.PutNode
+import org.actorlang.ast.ReturnNode
 import org.actorlang.ast.SelfLiteralNode
 import org.actorlang.ast.SendNode
 import org.actorlang.ast.StringLiteralNode
@@ -25,6 +29,8 @@ import org.actorlang.interpreter.Context
 import org.actorlang.interpreter.comms.Message
 import org.actorlang.interpreter.eval.scopes.BaseScope
 import org.actorlang.interpreter.eval.scopes.Scope
+import org.actorlang.interpreter.exceptions.FunctionReturnException
+import org.actorlang.interpreter.exceptions.UnknownFunctionException
 import org.actorlang.interpreter.objects.Actor
 import org.actorlang.parser.Position
 import java.util.LinkedList
@@ -230,9 +236,14 @@ abstract class AbstractEvaluator(
         }
     }
 
+    protected fun returnFromFunction(expression: ExpressionNode) {
+        throw FunctionReturnException(visitExpression(expression))
+    }
+
     abstract override fun visit(node: BecomeNode)
     abstract override fun visit(node: BehaviorNode)
     abstract override fun visit(node: SelfLiteralNode)
+    abstract override fun visit(node: FunctionDefNode)
 
     override fun visit(node: AssignNode) {
         currentScope[node.variable.name] = visitExpression(node.value)
@@ -309,6 +320,26 @@ abstract class AbstractEvaluator(
                 "A 'for' range must be composed of two integers"
             )
         }
+    }
+
+    override fun visit(node: ReturnNode) {
+        returnFromFunction(node.expression)
+    }
+
+    override fun visit(node: FunctionCallNode) {
+        val functionName = node.functionName.name
+        val function = context.functions.getOrElse(functionName) {
+            rethrowWithPosition(node.startPosition, UnknownFunctionException(functionName))
+        }
+        result = function.call(
+            node.args.map { visitExpression(it) }.toTypedArray(),
+            context
+        )
+    }
+
+    override fun visit(node: CallNode) {
+        visit(node.functionCall)
+        result = Unit
     }
 
     override fun visit(node: IdentifierNode) {
