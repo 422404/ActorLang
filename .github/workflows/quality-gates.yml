@@ -20,10 +20,10 @@ jobs:
       with:
         distribution: 'adopt'
         java-version: 8
-    - uses: eskatos/gradle-command-action@v1
+    - uses: eskatos/gradle-command-action@v2
       with:
         arguments: ktlintCheck
-    - uses: eskatos/gradle-command-action@v1
+    - uses: eskatos/gradle-command-action@v2
       with:
         arguments: test
 
