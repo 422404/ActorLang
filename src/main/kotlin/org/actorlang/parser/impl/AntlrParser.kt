@@ -50,7 +50,7 @@ class AntlrParser : ActorLangBaseVisitor<Node>(), Parser {
     }
 
     private fun sourcePosition(token: Token) =
-        Position(token.line, token.charPositionInLine, token.inputStream.sourceName)
+        Position(token.line, token.charPositionInLine + 1, token.inputStream.sourceName)
 
     private fun createBinaryOpOrExpressionNode(
         type: BinaryOpType,
