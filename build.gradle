@@ -8,7 +8,7 @@ plugins {
 
 group = 'org.actorlang'
 version = '1.1.1-SNAPSHOT'
-archivesBaseName = 'org.actorlang.actorlang'
+archivesBaseName = 'org.actorlang.cli'
 
 repositories {
     mavenCentral()
@@ -35,6 +35,7 @@ jacocoTestReport {
 
 dependencies {
     implementation project(":parser")
+    implementation project(":runtime")
 
     // Tests
     testImplementation "org.mockito:mockito-core:3.+"
