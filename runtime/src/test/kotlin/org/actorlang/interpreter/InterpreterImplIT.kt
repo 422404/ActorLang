@@ -371,4 +371,32 @@ class InterpreterImplIT {
         )
         assertContains(printedObjects, text)
     }
+
+    @Test
+    fun `An actor can become another actor type`() {
+        val (interpreter, printedObjects) = createDefaultInterpreter()
+        interpreter.run(
+            """
+            Adder (X, Notifier) ["add", value] = {
+                newValue = X + value;
+                send [newValue] to Notifier;
+                become Adder(newValue, Notifier)
+            };
+            
+            Printer () [value] = display value;
+            
+            Notifier0 (Printer) [value] = become Notifier1(Printer);
+            Notifier1 (Printer) [value] = send [value] to Printer;
+            
+            printer = create Printer();
+            notifier = create Notifier0(printer);
+            adder = create Adder(0, notifier);
+            
+            send ["add", 21] to adder;
+            send ["add", 21] to adder;
+            """.trimIndent(),
+            "<test>"
+        )
+        assertContains(printedObjects, 42)
+    }
 }
