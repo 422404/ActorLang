@@ -15,7 +15,7 @@ class ActorLangAntlrErrorListener : BaseErrorListener() {
         msg: String,
         e: RecognitionException?
     ) {
-        val position = Position(line, charPositionInLine, e?.inputStream?.sourceName ?: "<unknown>")
+        val position = Position(line, charPositionInLine, recognizer.inputStream.sourceName)
         throw SyntaxError(msg, position)
     }
 }

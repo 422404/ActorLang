@@ -1,8 +1,10 @@
 package org.actorlang.parser.impl
 
 import org.actorlang.parser.Parser
+import org.actorlang.parser.exceptions.SyntaxError
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import kotlin.test.assertEquals
 
 class AntlrParserTest {
@@ -18,6 +20,21 @@ class AntlrParserTest {
         val rootNode = parser.parse("a = 42", "<test>")
         assertEquals(1, rootNode.startPosition.line)
         assertEquals(1, rootNode.startPosition.column)
+    }
+
+    @Test
+    fun `The node's start and end positions have the same source name as the one given to the parser`() {
+        val sourceName = "<the-source-name>"
+        val rootNode = parser.parse("a = 42", sourceName)
+        assertEquals(sourceName, rootNode.startPosition.sourceName)
+        assertEquals(sourceName, rootNode.endPosition.sourceName)
+    }
+
+    @Test
+    fun `Syntax errors are reported with the error position`() {
+        assertThrows<SyntaxError> {
+            parser.parse("fun isn't() = it?", "<test>")
+        }
     }
 
     @Test
@@ -115,7 +132,7 @@ class AntlrParserTest {
     fun `Can parse arithmetic expressions`() {
         val rootNode = parser.parse(
             """
-            display x * 2 + (2 / y * 8) - (value % x)
+            display x * 2 + (2 / y * 8) - (value % x) * +(-1)
             """.trimIndent(),
             "<test>"
         )
@@ -126,7 +143,7 @@ class AntlrParserTest {
     fun `Can parse logical predicate expressions`() {
         val rootNode = parser.parse(
             """
-            display true && (a || b) || false
+            display true && (a || !b) || false
             """.trimIndent(),
             "<test>"
         )

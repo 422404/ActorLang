@@ -24,10 +24,10 @@ import org.actorlang.ast.UnaryOpNode
 import org.actorlang.ast.visitor.BaseAstVisitor
 
 class AstPrettyPrinter(
-    val node: org.actorlang.ast.Node,
+    val node: Node,
     indentSize: Int
 ) : BaseAstVisitor() {
-    private val printer = org.actorlang.ast.printer.PrettyPrinter(indentSize)
+    private val printer = PrettyPrinter(indentSize)
 
     fun printAst() {
         visit(node)
