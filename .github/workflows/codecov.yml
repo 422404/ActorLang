@@ -23,7 +23,6 @@ jobs:
     - uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
-        files: ./build/reports/jacoco/report.xml
+        files: ./parser/build/reports/jacoco/report.xml, ./runtime/build/reports/jacoco/report.xml
         name: codecov-actorlang
         fail_ci_if_error: true
-
