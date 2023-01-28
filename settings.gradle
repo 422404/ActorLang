@@ -1,3 +1,5 @@
 rootProject.name = 'ActorLang'
 include 'parser'
-include 'runtime'
+include 'actorsystem-servicecontract'
+include 'actorsystem-impl'
+include 'interpreter'

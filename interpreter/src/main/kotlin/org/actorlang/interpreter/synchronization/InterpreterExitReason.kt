@@ -1,0 +1,3 @@
+package org.actorlang.interpreter.synchronization
+
+interface InterpreterExitReason

@@ -5,6 +5,6 @@ import org.actorlang.parser.Position
 class BecomeNode(
     startPosition: Position,
     endPosition: Position,
-    val behaviorName: org.actorlang.ast.IdentifierNode,
-    val stateValues: Array<org.actorlang.ast.ExpressionNode>
-) : org.actorlang.ast.StatementNode(startPosition, endPosition)
+    val actorStateName: IdentifierNode,
+    val stateValues: Array<ExpressionNode>
+) : StatementNode(startPosition, endPosition)

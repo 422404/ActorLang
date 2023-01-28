@@ -1,5 +1,5 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.5.0'
+    id 'org.jetbrains.kotlin.jvm' version '1.7.20'
     id 'application'
     id 'org.jlleitschuh.gradle.ktlint' version '10.0.0'
     id 'com.adarshr.test-logger' version '3.0.0'
@@ -15,7 +15,7 @@ repositories {
 }
 
 application {
-    mainClass.set('org.actorlang.MainKt')
+    mainClass.set('org.actorlang.cli.MainKt')
     applicationName = 'actorlang'
 }
 
@@ -35,7 +35,9 @@ jacocoTestReport {
 
 dependencies {
     implementation project(":parser")
-    implementation project(":runtime")
+    implementation project(":interpreter")
+    implementation project(":actorsystem-impl")
+    implementation project(":actorsystem-servicecontract")
 
     // Tests
     testImplementation "org.mockito:mockito-core:3.+"
@@ -44,7 +46,11 @@ dependencies {
     testImplementation 'org.jetbrains.kotlin:kotlin-test-junit5'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.0'
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+    implementation "io.github.microutils:kotlin-logging-jvm:3.0.4"
+    runtimeOnly "org.slf4j:slf4j-simple:2.0.3"
 }
 
 test {

@@ -114,7 +114,7 @@ class AntlrParser : ActorLangBaseVisitor<Node>(), Parser {
         return BecomeNode(
             startPosition = sourcePosition(ctx.start),
             endPosition = sourcePosition(ctx.stop),
-            behaviorName = visit(ctx.parameterizedBehavior().identifier()) as IdentifierNode,
+            actorStateName = visit(ctx.parameterizedBehavior().identifier()) as IdentifierNode,
             stateValues = ctx.parameterizedBehavior().expr().map {
                 visit(it) as ExpressionNode
             }.toTypedArray()

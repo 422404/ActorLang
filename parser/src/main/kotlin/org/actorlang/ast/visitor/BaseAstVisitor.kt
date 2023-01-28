@@ -14,8 +14,6 @@ import org.actorlang.ast.FunctionDefNode
 import org.actorlang.ast.IdentifierNode
 import org.actorlang.ast.IfNode
 import org.actorlang.ast.IntegerLiteralNode
-import org.actorlang.ast.MessagePatternItem
-import org.actorlang.ast.Node
 import org.actorlang.ast.PutNode
 import org.actorlang.ast.ReturnNode
 import org.actorlang.ast.RootNode
@@ -64,7 +62,7 @@ open class BaseAstVisitor : AstVisitor {
     }
 
     override fun visit(node: BecomeNode) {
-        visit(node.behaviorName)
+        visit(node.actorStateName)
         node.stateValues.forEach {
             visit(it)
         }
