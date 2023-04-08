@@ -6,4 +6,4 @@ class IntegerLiteralNode(
     startPosition: Position,
     endPosition: Position,
     val value: Int
-) : org.actorlang.ast.ExpressionNode(startPosition, endPosition), org.actorlang.ast.MessagePatternItem
+) : ExpressionNode(startPosition, endPosition), MessagePatternItem

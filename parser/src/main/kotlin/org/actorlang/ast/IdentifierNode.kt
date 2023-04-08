@@ -6,4 +6,4 @@ class IdentifierNode(
     startPosition: Position,
     endPosition: Position,
     val name: String
-) : org.actorlang.ast.ExpressionNode(startPosition, endPosition), org.actorlang.ast.MessagePatternItem
+) : ExpressionNode(startPosition, endPosition), MessagePatternItem

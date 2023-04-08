@@ -6,4 +6,4 @@ class StringLiteralNode(
     startPosition: Position,
     endPosition: Position,
     val text: String
-) : org.actorlang.ast.ExpressionNode(startPosition, endPosition), org.actorlang.ast.MessagePatternItem
+) : ExpressionNode(startPosition, endPosition), MessagePatternItem

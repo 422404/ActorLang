@@ -50,7 +50,7 @@ class AstPrettyPrinter(
         printer.apply {
             println("BecomeNode {")
             indent {
-                println("behavior = ${node.behaviorName.name}")
+                println("behavior = ${node.actorStateName.name}")
                 println("state = (")
                 indent {
                     node.stateValues.forEach {

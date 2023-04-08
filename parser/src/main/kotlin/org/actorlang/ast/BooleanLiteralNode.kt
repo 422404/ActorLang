@@ -6,4 +6,4 @@ class BooleanLiteralNode(
     startPosition: Position,
     endPosition: Position,
     val value: Boolean
-) : org.actorlang.ast.ExpressionNode(startPosition, endPosition), org.actorlang.ast.MessagePatternItem
+) : ExpressionNode(startPosition, endPosition), MessagePatternItem

@@ -5,14 +5,14 @@ import org.actorlang.parser.Position
 class FunctionDefNode(
     startPosition: Position,
     endPosition: Position,
-    val functionName: org.actorlang.ast.IdentifierNode,
-    val argsNames: Array<org.actorlang.ast.IdentifierNode>,
+    val functionName: IdentifierNode,
+    val argsNames: Array<IdentifierNode>,
     /**
      * Set if the function is defined using an expression.
      * Example:
      * fun F(x) = x * x;
      */
-    val returnExpression: org.actorlang.ast.ExpressionNode?,
+    val returnExpression: ExpressionNode?,
     /**
      * Set if the function is defined using a statement or a block.
      * Examples:
@@ -21,5 +21,5 @@ class FunctionDefNode(
      *     display x * 2
      * };
      */
-    val statements: Array<org.actorlang.ast.StatementNode>?
-) : org.actorlang.ast.StatementNode(startPosition, endPosition)
+    val statements: Array<StatementNode>?
+) : StatementNode(startPosition, endPosition)
