@@ -14,30 +14,20 @@ repositories {
     mavenCentral()
 }
 
+jacoco {
+    toolVersion = '0.8.8'
+}
+
 generateGrammarSource {
     arguments += ["-visitor", "-long-messages"]
     outputDirectory = file("src/main/java/")
 }
 
-jacoco {
-    toolVersion = '0.8.7'
-}
-
 jacocoTestReport {
     reports {
-        xml.enabled = true
-        xml.destination = file("${buildDir}/reports/jacoco/report.xml")
-        html.enabled = true
-        html.destination = file("${buildDir}/reports/jacoco/html")
-        csv.enabled = false
-    }
-
-    afterEvaluate {
-        classDirectories.setFrom(files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: [
-                    "org/actorlang/antlr/gen/*"
-            ])
-        }))
+        xml.required = false
+        csv.required = false
+        html.outputLocation = file("${buildDir}/reports/jacoco/html")
     }
 }
 
@@ -56,13 +46,17 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    finalizedBy jacocoTestReport
 }
 
 compileKotlin {
     kotlinOptions.jvmTarget = '1.8'
+    dependsOn generateGrammarSource
 }
 
 compileTestKotlin {
     kotlinOptions.jvmTarget = '1.8'
+}
+
+runKtlintCheckOverMainSourceSet {
+    dependsOn generateGrammarSource
 }

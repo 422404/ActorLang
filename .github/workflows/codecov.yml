@@ -19,10 +19,10 @@ jobs:
         java-version: 8
     - uses: eskatos/gradle-command-action@v2
       with:
-        arguments: test
+        arguments: testCodeCoverageReport
     - uses: codecov/codecov-action@v3
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
-        files: ./parser/build/reports/jacoco/report.xml,./interpreter/build/reports/jacoco/report.xml,./actorsystem-servicecontract/build/reports/jacoco/report.xml,./actorsystem-impl/build/reports/jacoco/report.xml
+        files: ./code-coverage-report/build/reports/jacoco/testCodeCoverageReport/testCodeCoverageReport.xml
         name: codecov-actorlang
         fail_ci_if_error: true
