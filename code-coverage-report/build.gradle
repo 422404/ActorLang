@@ -1,0 +1,38 @@
+plugins {
+    id 'base'
+    id 'jacoco-report-aggregation'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    jacocoAggregation project(':parser')
+    jacocoAggregation project(':actorsystem-servicecontract')
+    jacocoAggregation project(':actorsystem-impl')
+    jacocoAggregation project(':interpreter')
+}
+
+reporting {
+    reports {
+        testCodeCoverageReport(JacocoCoverageReport) {
+            testType = TestSuiteType.UNIT_TEST
+        }
+    }
+}
+
+tasks.named('check') {
+    dependsOn tasks.named('testCodeCoverageReport', JacocoReport)
+}
+
+testCodeCoverageReport {
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                // We exclude the parser Java generated sources
+                "org/actorlang/antlr/gen/*"
+            ])
+        }))
+    }
+}
