@@ -8,9 +8,6 @@ repositories {
 }
 
 dependencies {
-    jacocoAggregation project(':parser')
-    jacocoAggregation project(':actorsystem-servicecontract')
-    jacocoAggregation project(':actorsystem-impl')
     jacocoAggregation project(':interpreter')
 }
 
@@ -23,14 +20,14 @@ reporting {
 }
 
 tasks.named('check') {
-    dependsOn tasks.named('testCodeCoverageReport', JacocoReport)
+    finalizedBy tasks.named('testCodeCoverageReport')
 }
 
 testCodeCoverageReport {
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
             fileTree(dir: it, exclude: [
-                // We exclude the parser Java generated sources
+                // We exclude the parser generated sources
                 "org/actorlang/antlr/gen/*"
             ])
         }))
