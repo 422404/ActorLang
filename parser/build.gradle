@@ -1,62 +1,32 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm'
     id 'antlr'
-    id 'org.jlleitschuh.gradle.ktlint'
-    id 'com.adarshr.test-logger'
-    id 'jacoco'
+    id 'actorlang.kotlin-conventions'
 }
 
-group = 'org.actorlang'
-version = '1.1.1-SNAPSHOT'
-archivesBaseName = 'org.actorlang.parser'
+version = parent.version
+archivesBaseName = "${parent.group}.parser"
 
-repositories {
-    mavenCentral()
+dependencies {
+    antlr 'org.antlr:antlr4:4.9'
 }
 
-jacoco {
-    toolVersion = '0.8.8'
-}
-
-generateGrammarSource {
+tasks.named('generateGrammarSource', AntlrTask) {
     arguments += ["-visitor", "-long-messages"]
     outputDirectory = file("src/main/java/")
 }
 
-jacocoTestReport {
-    reports {
-        xml.required = false
-        csv.required = false
-        html.outputLocation = file("${buildDir}/reports/jacoco/html")
-    }
+tasks.named('compileKotlin') {
+    dependsOn tasks.named('generateGrammarSource')
 }
 
-dependencies {
-    antlr 'org.antlr:antlr4:4.9'
-
-    // Tests
-    testImplementation "org.mockito:mockito-core:3.+"
-    testImplementation 'org.mockito:mockito-inline:3.11.0'
-    testImplementation "org.mockito.kotlin:mockito-kotlin:3.2.0"
-    testImplementation 'org.jetbrains.kotlin:kotlin-test-junit5'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.0'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+tasks.named('compileTestKotlin') {
+    dependsOn tasks.named('generateTestGrammarSource')
 }
 
-test {
-    useJUnitPlatform()
+tasks.named('runKtlintCheckOverMainSourceSet') {
+    dependsOn tasks.named('generateGrammarSource')
 }
 
-compileKotlin {
-    kotlinOptions.jvmTarget = '1.8'
-    dependsOn generateGrammarSource
-}
-
-compileTestKotlin {
-    kotlinOptions.jvmTarget = '1.8'
-}
-
-runKtlintCheckOverMainSourceSet {
-    dependsOn generateGrammarSource
+tasks.named('runKtlintCheckOverTestSourceSet') {
+    dependsOn tasks.named('generateTestGrammarSource')
 }
